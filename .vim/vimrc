@@ -1,0 +1,80 @@
+"Basic configuration
+"================================================
+set nocompatible
+syntax on
+let mapleader=","
+set backspace=indent,eol,start
+"always let the last window have a status line
+set laststatus=2
+set ruler
+set number
+colorscheme apprentice
+"colorscheme ir_dark
+"colorscheme maroloccio3
+"colorscheme solarized
+"colorscheme nefertiti
+"colorscheme mustang
+"colorscheme zenburn
+
+"Indentation settings
+"================================================
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set smarttab
+filetype plugin indent on
+
+"Search settings
+"================================================
+set showmatch
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+nnoremap <silent> <leader>q :nohlsearch<CR>
+
+"Custom command for fzf and ripgrep
+command! -bang -nargs=* Search call fzf#vim#grep(
+  \ 'rg --line-number --no-heading --fixed-strings --ignore-case
+  \ --no-ignore --hidden --follow --glob "!.git/*" --color "always" '
+  \ . shellescape(<q-args>), 1, <bang>0)
+
+"Extra key bindings
+"================================================
+nnoremap j gj
+nnoremap k gk
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
+"edit and source vimrc on the fly
+nnoremap <leader>ev :split $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+"open buffers for selection
+nnoremap <leader>b :ls<CR>:b<space>
+"open fzf file search
+nnoremap <leader>fs :Files<CR>
+"open rg and fzf to search inside files
+nnoremap <leader>s :Search<space>
+"change word to uppercase
+inoremap <C-u> <esc>viwUea
+
+"Syntax highlighting (for strange extensions)
+"================================================
+augroup filetype_cmds
+  autocmd!
+  autocmd BufRead,BufNewFile *.sage set filetype=python
+  autocmd BufRead,BufNewFile *.adoc set filetype=asciidoc
+  autocmd BufRead,BufNewFile *bashrc* set filetype=sh
+  autocmd BufRead,BufNewFile *bash_* set filetype=sh
+augroup END
+
+
+if has('linux')
+  "additional settings and bindings for linux
+  let g:nv_search_paths = ['~/notes']
+  let g:nv_main_directory = '~/notes'
+  let g:nvlinks_follow_key = 'C-f'
+
+  nnoremap <leader>n :NV!<CR>
+endif 
