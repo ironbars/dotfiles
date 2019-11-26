@@ -61,8 +61,6 @@ alias df="df -h"
 alias bashrc="vim ~/.bash_profile"
 alias vimrc="vim ~/.vim/vimrc"
 alias sb="source ~/.bash_profile"
-alias cn="cd ~/notes"
-alias cv="cd ~/.vim/pack/dist/start/nvlinks"
 
 if [[ -n "${os}" ]]; then
   case "${os}" in
