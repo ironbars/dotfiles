@@ -6,6 +6,8 @@
 fedora_handler() {
   sudo dnf -y copr enable thelocehiliosan/yadm
   sudo dnf -y install yadm
+  rm -f "${HOME}"/.bash_profile
+  rm -f "${HOME}"/.bashrc
 }
 
 
@@ -14,8 +16,8 @@ arch_handler() {
   git clone https://aur.archlinux.org/yadm.git
   (cd yadm && makepkg -si --noconfirm)
   rm -rf yadm/
-  rm "${HOME}"/.bash_profile
-  rm "${HOME}"/.bashrc
+  rm -f "${HOME}"/.bash_profile
+  rm -f "${HOME}"/.bashrc
 }
 
 
