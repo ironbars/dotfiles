@@ -1,0 +1,99 @@
+#!/bin/bash
+
+readonly COMMON_PACKAGES=("fzf" "ripgrep" "unrar")
+readonly COMMON_VIM_PLUGIN_DIR="${HOME}"/.vim/pack/dist/start
+readonly COMMON_VIM_PLUGINS=(
+  "https://github.com/vim-airline/vim-airline.git"
+  "https://github.com/junegunn/fzf.vim"
+)
+
+
+die() {
+  echo "$@" >&2
+  exit 1
+}
+
+
+install_vim_plugins() {
+  plugins=("$@")
+
+  [[ ! -d "${COMMON_VIM_PLUGIN_DIR}" ]] && mkdir -p "${COMMON_VIM_PLUGIN_DIR}"
+
+  for plugin in "${plugins[@]}"; do
+    local reponame="${plugin##*/}"
+    local install_dir="${reponame%.*}"
+    git clone "${plugin}" "${COMMON_VIM_PLUGIN_DIR}"/"${install_dir}"
+  done
+}
+
+
+bootstrap_darwin() {
+  local os_packages=("vim" "xz")
+
+  command -v brew > /dev/null 2>&1
+
+  if [[ $? -ne 0 ]]; then
+    die "Please install Homebrew before running this script"
+  fi
+
+  brew install "${COMMON_PACKAGES[@]}" "${os_packages}"
+}
+
+
+bootstrap_linux() {
+  local os="$(grep '^ID=' /etc/os-release | cut -f2 -d"=")"
+
+  case "${os}" in
+    "arch")
+      bootstrap_arch
+      ;;
+    "fedora")
+      bootstrap_fedora
+      ;;
+    *)
+      die "Unsupported OS"
+      ;;
+  esac
+}
+
+
+bootstrap_arch() {
+  # Although I would like to only install things that make my system usable
+  # with my current configs, Arch needs some additional things installed to
+  # make the system usable at all
+  local os_packages=("man-db" "man-pages" "python" "ruby" "p7zip")
+
+  sudo pacman -Fy
+  sudo pacman --noconfirm -S "${COMMON_PACKAGES[@]}" "${os_packages[@]}"
+}
+
+
+#bootstrap_fedora() {
+#}
+
+
+main() {
+  local os_vim_plugins=
+
+  case "${OSTYPE}" in 
+    "darwin"*)
+      bootstrap_darwin
+      os_vim_plugins=()
+      ;;
+    "linux-gnu")
+      bootstrap_linux
+      os_vim_plugins=(
+        "https://github.com/alok/notational-fzf-vim.git"
+        "https://github.com/ironbars/nvlinks.git"
+      )
+      ;;
+    *)
+      die "Unsupported platform"
+      ;;
+  esac
+
+  install_vim_plugins "${COMMON_VIM_PLUGINS[@]}" "${os_vim_plugins[@]}"
+}
+
+
+main

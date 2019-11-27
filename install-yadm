@@ -1,0 +1,66 @@
+#!/bin/bash
+
+# The goal here is to get yadm installed, and that's it.  Other setup can be  
+# done in yadm's bootstrap script (at ~/.config/yadm/bootstrap)
+
+fedora_handler() {
+  sudo dnf -y copr enable thelocehiliosan/yadm
+  sudo dnf -y install yadm
+}
+
+
+arch_handler() {
+  sudo pacman --noconfirm -Syu base-devel git vim inetutils
+  git clone https://aur.archlinux.org/yadm.git
+  (cd yadm && makepkg -si --noconfirm)
+  rm -rf yadm/
+  rm "${HOME}"/.bash_profile
+  rm "${HOME}"/.bashrc
+}
+
+
+darwin_handler() {
+  /usr/bin/ruby -e "$(
+    curl -fsSL \
+    https://raw.githubusercontent.com/Homebrew/install/master/install
+  )"
+  brew install yadm
+}
+
+
+linux_handler() {
+  local os="$(grep '^ID=' /etc/os-release | cut -f2 -d"=")"
+
+  case "${os}" in
+    "arch")
+      arch_handler
+      ;;
+    "fedora")
+      fedora_handler
+      ;;
+    *)
+      echo "Unsupported OS" >&2
+      exit 1
+      ;;
+  esac
+}
+
+
+main() {
+  case "${OSTYPE}" in
+    "darwin"*)
+      darwin_handler
+      ;;
+    "linux-gnu")
+      linux_handler
+      ;;
+    *)
+      echo "Unsupported platform" >&2
+      exit 1
+      ;;
+  esac
+
+  yadm clone https://github.com/ironbars/dotfiles.git
+}
+
+main
