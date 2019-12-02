@@ -103,6 +103,9 @@ ex() {
       *.tar.gz|*.tgz) 
         tar xzf "$1"
         ;;
+      *.tar.xz)
+        tar xJf "$1"
+        ;;
       *.bz2)
         bunzip2 "$1"
         ;;
@@ -160,9 +163,11 @@ csource() {
 # usage: cl <directory>
 cl() {
   local dir="$1"
-  if [[ -z "$dir" ]]; then
+
+  if [[ -z "${dir}" ]]; then
     dir="${HOME}"
   fi
+
   if [[ -d "${dir}" || "${dir}" == "-" ]]; then
     cd "$dir"
     ls
