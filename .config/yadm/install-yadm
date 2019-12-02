@@ -4,10 +4,12 @@
 # done in yadm's bootstrap script (at ~/.config/yadm/bootstrap)
 
 fedora_handler() {
-  sudo dnf -y copr enable thelocehiliosan/yadm
+  sudo dnf config-manager -y --add-repo \
+    https://download.opensuse.org/repositories/home:TheLocehiliosan:yadm/Fedora_30/home:TheLocehiliosan:yadm.repo
   sudo dnf -y install yadm
-  rm -f "${HOME}"/.bash_profile
-  rm -f "${HOME}"/.bashrc
+
+  [[ -f "${HOME}"/.bash_profile ]] && rm -f "${HOME}"/.bash_profile
+  [[ -f "${HOME}"/.bashrc ]] && rm -f "${HOME}"/.bashrc
 }
 
 
@@ -16,8 +18,9 @@ arch_handler() {
   git clone https://aur.archlinux.org/yadm.git
   (cd yadm && makepkg -si --noconfirm)
   rm -rf yadm/
-  rm -f "${HOME}"/.bash_profile
-  rm -f "${HOME}"/.bashrc
+
+  [[ -f "${HOME}"/.bash_profile ]] && rm -f "${HOME}"/.bash_profile
+  [[ -f "${HOME}"/.bashrc ]] && rm -f "${HOME}"/.bashrc
 }
 
 
