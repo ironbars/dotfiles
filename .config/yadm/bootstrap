@@ -50,7 +50,7 @@ bootstrap_darwin() {
 
   if [[ "${#pkgs_to_install[@]}" -eq 0 ]]; then
     echo "Nothing to do"
-    exit 
+    return 
   fi
 
   brew install "${pkgs_to_install[@]}"
