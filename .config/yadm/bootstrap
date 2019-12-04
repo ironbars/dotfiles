@@ -21,14 +21,18 @@ install_vim_plugins() {
 
   for plugin in "${plugins[@]}"; do
     local reponame="${plugin##*/}"
-    local install_dir="${reponame%.*}"
-    git clone "${plugin}" "${COMMON_VIM_PLUGIN_DIR}"/"${install_dir}"
+    local install_path="${COMMON_VIM_PLUGIN_DIR}"/"${reponame%.*}"
+
+    if [[ ! -d "${install_path}" ]]; then
+      git clone "${plugin}" "${install_path}"
+    fi
   done
 }
 
 
 bootstrap_darwin() {
   local os_packages=("vim" "xz")
+  local pkgs_to_install=()
 
   command -v brew > /dev/null 2>&1
 
@@ -36,7 +40,20 @@ bootstrap_darwin() {
     die "Please install Homebrew before running this script"
   fi
 
-  brew install "${COMMON_PACKAGES[@]}" "${os_packages}"
+  for pkg in "${COMMON_PACKAGES[@]}" "${os_packages}"; do
+    brew info "${pkg}" | grep "Not installed" > /dev/null 2>&1
+
+    if [[ $? -eq 0 ]]; then
+      pkgs_to_install+=("${pkg}")
+    fi
+  done
+
+  if [[ "${#pkgs_to_install[@]}" -eq 0 ]]; then
+    echo "Nothing to do"
+    exit 
+  fi
+
+  brew install "${pkgs_to_install[@]}"
 }
 
 
