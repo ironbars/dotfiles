@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# The goal here is to get yadm installed, and that's it.  Other setup can be  
-# done in yadm's bootstrap script (at ~/.config/yadm/bootstrap)
+# The goal here is to get yadm installed, clone my dotfile repo, and that's it.  
+# Other setup can be done in yadm's bootstrap script (at 
+# ~/.config/yadm/bootstrap)
 
 fedora_handler() {
   sudo dnf config-manager -y --add-repo \
@@ -14,7 +15,7 @@ fedora_handler() {
 
 
 arch_handler() {
-  sudo pacman --noconfirm -Syu base-devel git vim inetutils
+  sudo pacman --noconfirm -Syu --needed base-devel git vim inetutils
   git clone https://aur.archlinux.org/yadm.git
   (cd yadm && makepkg -si --noconfirm)
   rm -rf yadm/
