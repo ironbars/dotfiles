@@ -31,6 +31,8 @@ darwin_handler() {
     https://raw.githubusercontent.com/Homebrew/install/master/install
   )"
   brew install yadm
+
+  [[ -f "${HOME}"/.profile ]] && rm -f "${HOME}"/.profile
 }
 
 
