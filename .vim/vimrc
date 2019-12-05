@@ -37,7 +37,7 @@ nnoremap <silent> <leader>q :nohlsearch<CR>
 command! -bang -nargs=* Search call fzf#vim#grep(
   \ 'rg --line-number --no-heading --fixed-strings --ignore-case
   \ --no-ignore --hidden --follow --glob "!.git/*" --color "always" '
-  \ . shellescape(<q-args>), 1, <bang>0)
+  \ . shellescape(<q-args>), 0, <bang>0)
 
 "Extra key bindings
 "================================================
@@ -78,3 +78,7 @@ if has('linux')
 
   nnoremap <leader>n :NV!<CR>
 endif 
+
+if has('mac')
+  set rtp+=/usr/local/opt/fzf
+endif
