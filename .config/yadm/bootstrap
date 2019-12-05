@@ -5,11 +5,12 @@ readonly MYADM_DIR="$(
 )"
 readonly MYADM_COMMON_PKGS=("fzf" "ripgrep" "unrar")
 readonly MYADM_VIM_PLUGIN_DIR="${HOME}"/.vim/pack/dist/start
-readonly MYADM_PKGS_TO_INSTALL=()
 readonly MYADM_COMMON_VIM_PLUGINS=(
   "https://github.com/vim-airline/vim-airline.git"
   "https://github.com/junegunn/fzf.vim"
 )
+
+MYADM_PKGS_TO_INSTALL=()
 
 install_vim_plugins() {
   plugins=("$@")
