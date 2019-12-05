@@ -30,11 +30,10 @@ install_vim_plugins() {
 
 bootstrap() {
   myadm_pkg_mgr_prep
-  myadm_check_installed_pkgs "${MYADM_CHECK_INSTALLED_CMD}" \
-    "${MYADM_COMMON_PKGS[@]}" "${MYADM_OS_PKGS}"
+  myadm_check_installed_pkgs "${MYADM_COMMON_PKGS[@]}" "${MYADM_OS_PKGS[@]}"
 
   if [[ "${#MYADM_PKGS_TO_INSTALL[@]}" -ne 0 ]]; then
-    "${MYADM_INSTALL_CMD}" "${MYADM_PKGS_TO_INSTALL[@]}"
+    "${MYADM_INSTALL_CMD[@]}" "${MYADM_PKGS_TO_INSTALL[@]}"
   else
     yellow_echo "No packages to install"
   fi

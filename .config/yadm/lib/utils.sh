@@ -20,12 +20,10 @@ yellow_echo() {
 
 
 myadm_check_installed_pkgs() {
-  check_installed_cmd="$1"
-  shift
   pkgs=("$@")
 
   for pkg in "${pkgs[@]}"; do
-    "${check_installed_cmd}" "${pkg}" > /dev/null 2>&1
+    "${MYADM_CHECK_INSTALLED_CMD[@]}" "${pkg}" > /dev/null 2>&1
 
     [[ $? -ne 0 ]] && MYADM_PKGS_TO_INSTALL+=("${pkg}")
   done

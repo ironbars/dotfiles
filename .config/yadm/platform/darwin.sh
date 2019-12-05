@@ -1,5 +1,5 @@
-MYADM_CHECK_INSTALLED_CMD="brew ls --versions"
-MYADM_INSTALL_CMD="brew install"
+MYADM_CHECK_INSTALLED_CMD=(brew ls --versions)
+MYADM_INSTALL_CMD=(brew install)
 MYADM_OS_PKGS=("vim" "xz")
 MYADM_OS_VIM_PLUGINS=()
 
