@@ -1,27 +1,24 @@
 #!/bin/bash
 
-readonly COMMON_PACKAGES=("fzf" "ripgrep" "unrar")
-readonly COMMON_VIM_PLUGIN_DIR="${HOME}"/.vim/pack/dist/start
-readonly COMMON_VIM_PLUGINS=(
+readonly MYADM_DIR="$(
+  cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null 2>&1 && pwd
+)"
+readonly MYADM_COMMON_PKGS=("fzf" "ripgrep" "unrar")
+readonly MYADM_VIM_PLUGIN_DIR="${HOME}"/.vim/pack/dist/start
+readonly MYADM_PKGS_TO_INSTALL=()
+readonly MYADM_COMMON_VIM_PLUGINS=(
   "https://github.com/vim-airline/vim-airline.git"
   "https://github.com/junegunn/fzf.vim"
 )
 
-
-die() {
-  echo "$@" >&2
-  exit 1
-}
-
-
 install_vim_plugins() {
   plugins=("$@")
 
-  [[ ! -d "${COMMON_VIM_PLUGIN_DIR}" ]] && mkdir -p "${COMMON_VIM_PLUGIN_DIR}"
+  [[ ! -d "${MYADM_VIM_PLUGIN_DIR}" ]] && mkdir -p "${MYADM_VIM_PLUGIN_DIR}"
 
   for plugin in "${plugins[@]}"; do
     local reponame="${plugin##*/}"
-    local install_path="${COMMON_VIM_PLUGIN_DIR}"/"${reponame%.*}"
+    local install_path="${MYADM_VIM_PLUGIN_DIR}"/"${reponame%.*}"
 
     if [[ ! -d "${install_path}" ]]; then
       git clone "${plugin}" "${install_path}"
@@ -30,93 +27,39 @@ install_vim_plugins() {
 }
 
 
-bootstrap_darwin() {
-  local os_packages=("vim" "xz")
-  local pkgs_to_install=()
+bootstrap() {
+  myadm_pkg_mgr_prep
+  myadm_check_installed_pkgs "${MYADM_CHECK_INSTALLED_CMD}" \
+    "${MYADM_COMMON_PKGS[@]}" "${MYADM_OS_PKGS}"
 
-  command -v brew > /dev/null 2>&1
-
-  if [[ $? -ne 0 ]]; then
-    die "Please install Homebrew before running this script"
+  if [[ "${#MYADM_PKGS_TO_INSTALL[@]}" -ne 0 ]]; then
+    "${MYADM_INSTALL_CMD}" "${MYADM_PKGS_TO_INSTALL[@]}"
+  else
+    yellow_echo "No packages to install"
   fi
 
-  for pkg in "${COMMON_PACKAGES[@]}" "${os_packages}"; do
-    brew info "${pkg}" | grep "Not installed" > /dev/null 2>&1
-
-    if [[ $? -eq 0 ]]; then
-      pkgs_to_install+=("${pkg}")
-    fi
-  done
-
-  if [[ "${#pkgs_to_install[@]}" -eq 0 ]]; then
-    echo "Nothing to do"
-    return 
-  fi
-
-  brew install "${pkgs_to_install[@]}"
-}
-
-
-bootstrap_linux() {
-  local os="$(grep '^ID=' /etc/os-release | cut -f2 -d"=")"
-
-  case "${os}" in
-    "arch")
-      bootstrap_arch
-      ;;
-    "fedora")
-      bootstrap_fedora
-      ;;
-    *)
-      die "Unsupported OS"
-      ;;
-  esac
-}
-
-
-bootstrap_arch() {
-  # Although I would like to only install things that make my system usable
-  # with my current configs, Arch needs some additional things installed to
-  # make the system usable at all
-  local os_packages=("man-db" "man-pages" "python" "ruby" "p7zip")
-
-  sudo pacman -Fy
-  sudo pacman --noconfirm -S "${COMMON_PACKAGES[@]}" "${os_packages[@]}"
-}
-
-
-bootstrap_fedora() {
-  local os_packages=("ncompress" "p7zip-plugins" "unrar" "bzip2")
-
-  sudo dnf install -y \
-    https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-30.noarch.rpm
-  sudo dnf install -y \
-    https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-30.noarch.rpm
-  sudo dnf install -y "${COMMON_PACKAGES[@]}" "${os_packages[@]}"
+  install_vim_plugins \
+    "${MYADM_COMMON_VIM_PLUGINS[@]}" "${MYADM_OS_VIM_PLUGINS[@]}"
 }
 
 
 main() {
-  local os_vim_plugins=
+  source "${MYADM_DIR}"/lib/utils.sh
 
   case "${OSTYPE}" in 
     "darwin"*)
-      bootstrap_darwin
-      os_vim_plugins=()
+      source "${MYADM_DIR}"/platform/darwin.sh
       ;;
     "linux-gnu")
-      bootstrap_linux
-      os_vim_plugins=(
-        "https://github.com/alok/notational-fzf-vim.git"
-        "https://github.com/ironbars/nvlinks.git"
-      )
+      source "${MYADM_DIR}"/platform/linux.sh
+      myadm_check_linux
       ;;
     *)
       die "Unsupported platform"
       ;;
   esac
 
-  install_vim_plugins "${COMMON_VIM_PLUGINS[@]}" "${os_vim_plugins[@]}"
+  bootstrap
 }
 
 
