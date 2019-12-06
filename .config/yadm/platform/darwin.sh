@@ -17,4 +17,7 @@ myadm_pkg_mgr_prep() {
       https://raw.githubusercontent.com/Homebrew/install/master/install
     )"
   fi
+
+  # This is sort of cheating, but I want iterm2 available straightaway
+  brew cask install iterm2
 }
