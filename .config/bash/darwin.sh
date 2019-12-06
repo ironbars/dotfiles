@@ -1,0 +1,6 @@
+ls_opts="-GF"
+la_opts="-a ${ls_opts}"
+ll_opts="-l -T ${ls_opts}"
+pkg_add="brew install"
+pkg_remove="brew uninstall"
+pkg_search="brew search"

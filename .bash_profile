@@ -5,6 +5,21 @@
 # If not running interactively, dont do anything
 [[ $- != *i* ]] && return
 
+# Check for supported platform and OS
+case "${OSTYPE}" in
+  "darwin"*)
+    source ~/.config/bash/darwin.sh
+    ;;
+  "linux-gnu")
+    source ~/.config/bash/linux.sh
+    ;;
+  *)
+    echo "Unsupported platform" >&2
+    return
+    ;;
+esac
+
+
 # Shell behavior variables
 # -------------
 shopt -s cdspell
@@ -31,27 +46,6 @@ PS1='\[\e[0;36m\][\u@\h \W]\$\[\e[0m\] '
 
 # Aliases
 # -------------
-case "${OSTYPE}" in
-  "darwin"*)
-    ls_opts="-GF"
-    la_opts="-a ${ls_opts}"
-    ll_opts="-l -T ${ls_opts}"
-    pkg_add="brew install"
-    pkg_remove="brew uninstall"
-    pkg_search="brew search"
-    ;;
-  "linux-gnu")
-    ls_opts='-F --group-directories-first --time-style=+"%Y.%m.%d %H:%M" --color=auto'
-    la_opts="-a ${ls_opts}"
-    ll_opts="-l ${ls_opts}"
-    os="$(grep '^ID=' /etc/os-release | cut -f2 -d"=")"
-    ;;
-  *)
-    echo "Unsupported platform" >&2
-    exit 1
-    ;;
-esac
-
 alias ls="ls ${ls_opts}"
 alias la="ls ${la_opts}"
 alias ll="ls ${ll_opts}"
@@ -62,31 +56,6 @@ alias gpom="git push origin master"
 alias bashrc="vim ~/.bash_profile"
 alias vimrc="vim ~/.vim/vimrc"
 alias sb="source ~/.bash_profile"
-
-if [[ -n "${os}" ]]; then
-  case "${os}" in
-    "arch")
-      pkg_add="sudo pacman -S"
-      pkg_remove="sudo pacman -Rsn"
-      pkg_search="pacman -Ss"
-      ;;
-    "fedora")
-      pkg_add="sudo dnf install"
-      pkg_remove="sudo dnf autoremove"
-      pkg_search="dnf search"
-      ;;
-    "ubuntu"|"debian")
-      pkg_add="sudo apt-get install"
-      pkg_remove="sudo apt-get autoremove"
-      pkg_search="apt-cache search"
-      ;;
-    *)
-      echo "Unsupported OS" >&2
-      exit 1
-      ;;
-  esac
-fi
-
 alias add="${pkg_add}"
 alias remove="${pkg_remove}"
 alias search="${pkg_search}"
