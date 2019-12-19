@@ -205,3 +205,15 @@ gitpr() {
   git push origin "${current}"
 }
 
+# hide - move file to a hidden location for temporary security
+hide() {
+  local hiding_place="${HOME}"/.fbn/
+  local secret="$1"
+
+  if [[ ! -d "${hiding_place}" ]]; then
+    mkdir -p "${hiding_place}"
+    chmod 700 "${hiding_place}"
+  fi
+
+  mv "${secret}" "${hiding_place}"
+}
