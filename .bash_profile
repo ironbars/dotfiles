@@ -19,7 +19,6 @@ case "${OSTYPE}" in
     ;;
 esac
 
-
 # Shell behavior variables
 # -------------
 shopt -s cdspell
@@ -217,3 +216,10 @@ hide() {
 
   mv "${secret}" "${hiding_place}"
 }
+
+# Here, you want to put functions that vary not only from computer types, but  
+# different contexts.  For example, utility functions that you may need for  
+# work at one company may differ from those you need at another, and may differ
+# still from home machines.  Source these additional definitions, if necessary.
+
+[[ -f ~/.config/bash/current.sh ]] && source ~/.config/bash/current.sh
