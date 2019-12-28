@@ -8,9 +8,6 @@ fedora_handler() {
   sudo dnf config-manager -y --add-repo \
     https://download.opensuse.org/repositories/home:TheLocehiliosan:yadm/Fedora_30/home:TheLocehiliosan:yadm.repo
   sudo dnf -y install yadm
-
-  [[ -f "${HOME}"/.bash_profile ]] && rm -f "${HOME}"/.bash_profile
-  [[ -f "${HOME}"/.bashrc ]] && rm -f "${HOME}"/.bashrc
 }
 
 
@@ -19,9 +16,17 @@ arch_handler() {
   git clone https://aur.archlinux.org/yadm.git
   (cd yadm && makepkg -si --noconfirm)
   rm -rf yadm/
+}
 
-  [[ -f "${HOME}"/.bash_profile ]] && rm -f "${HOME}"/.bash_profile
-  [[ -f "${HOME}"/.bashrc ]] && rm -f "${HOME}"/.bashrc
+
+# This is for servers where:
+# 1. you may not have root access
+# 2. extra software is not welcome
+centos_handler() {
+  [[ ! -d "${HOME}"/.local/bin ]] && mkdir -p "${HOME}"/.local/bin
+  
+  curl -fLo "${HOME}"/.local/bin/yadm https://github.com/TheLocehiliosan/yadm/raw/master/yadm \
+    && chmod a+x "${HOME}"/bin/yadm
 }
 
 
@@ -31,8 +36,6 @@ darwin_handler() {
     https://raw.githubusercontent.com/Homebrew/install/master/install
   )"
   brew install yadm
-
-  [[ -f "${HOME}"/.profile ]] && rm -f "${HOME}"/.profile
 }
 
 
@@ -67,6 +70,10 @@ main() {
       exit 1
       ;;
   esac
+
+  [[ -f "${HOME}"/.bash_profile ]] && rm -f "${HOME}"/.bash_profile
+  [[ -f "${HOME}"/.bashrc ]] && rm -f "${HOME}"/.bashrc
+  [[ -f "${HOME}"/.profile ]] && rm -f "${HOME}"/.profile
 
   yadm clone https://github.com/ironbars/dotfiles.git
 }

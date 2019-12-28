@@ -5,17 +5,13 @@ MYADM_OS_VIM_PLUGINS=(
 
 
 myadm_check_linux() {
-  os="$(grep '^ID=' /etc/os-release | cut -f2 -d"=")"
+  local os="$(grep '^ID=' /etc/os-release | cut -f2 -d"=")"
+  os="${os%\"}"
+  os="${os#\"}"
 
-  case "${os}" in
-    "arch")
-      source "${MYADM_DIR}"/platform/linux/arch.sh
-      ;;
-    "fedora")
-      source "${MYADM_DIR}"/platform/linux/fedora.sh
-      ;;
-    *)
-      die "Unsupported OS"
-      ;;
-  esac
+  source ~/"${MYADM_DIR}"/platform/linux/"${os}".sh > /dev/null 2>&1
+
+  if [[ $? -ne 0 ]]; then
+    die "Unsupported OS"
+  fi
 }

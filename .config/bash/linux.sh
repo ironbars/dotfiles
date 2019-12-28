@@ -2,6 +2,9 @@ ls_opts='-F --group-directories-first --time-style=+"%Y.%m.%d %H:%M" --color=aut
 la_opts="-a ${ls_opts}"
 ll_opts="-l ${ls_opts}"
 os="$(grep '^ID=' /etc/os-release | cut -f2 -d"=")"
+# Remove quotes if present
+os="${os#\"}"
+os="${os%\"}"
 
 source ~/.config/bash/"${os}".sh > /dev/null 2>&1
 
