@@ -33,6 +33,7 @@ shopt -s nocaseglob
 
 # Environment variables
 # -------------
+export PATH=${HOME}/.local/bin:${PATH}
 export HISTSIZE=10000
 export HISTFILESIZE=${HISTSIZE}
 export HISTCONTROL=ignoreboth
