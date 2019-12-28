@@ -9,7 +9,7 @@ myadm_check_linux() {
   os="${os%\"}"
   os="${os#\"}"
 
-  source ~/"${MYADM_DIR}"/platform/linux/"${os}".sh > /dev/null 2>&1
+  source "${MYADM_DIR}"/platform/linux/"${os}".sh > /dev/null 2>&1
 
   if [[ $? -ne 0 ]]; then
     die "Unsupported OS"
