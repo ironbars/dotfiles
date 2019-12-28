@@ -15,7 +15,7 @@ _FZF_INSTALL_PATH="${HOME}"/.local/fzf
 _FZF_URL="https://github.com/junegunn/fzf.git"
 _RG_VERSION=11.0.2
 _RG_TARBALL="ripgrep-${_RG_VERSION}-x86_64-unknown-linux-musl.tar.gz"
-_RG_INSTALL_PATH="${RG_TARBALL%%.tar.gz}"
+_RG_INSTALL_PATH="${_RG_TARBALL%%.tar.gz}"
 _RG_URL="https://github.com/BurntSushi/ripgrep/releases/download/${_RG_VERSION}/${_RG_TARBALL}"
 
 
