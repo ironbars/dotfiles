@@ -41,6 +41,8 @@ darwin_handler() {
 
 linux_handler() {
   local os="$(grep '^ID=' /etc/os-release | cut -f2 -d"=")"
+  os="${os%\"}"
+  os="${os#\"}"
 
   case "${os}" in
     "arch")
@@ -48,6 +50,9 @@ linux_handler() {
       ;;
     "fedora")
       fedora_handler
+      ;;
+    "centos")
+      centos_handler
       ;;
     *)
       echo "Unsupported OS" >&2
