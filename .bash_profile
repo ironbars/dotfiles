@@ -42,7 +42,13 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 
 # Prompt
 # -------------
-PS1='\[\e[0;36m\][\u@\h \W]\$\[\e[0m\] '
+if [[ -z ${prompt_color} ]]; then
+  prompt_color="$(tput setaf 6)"
+fi
+
+prompt_color_reset="$(tput sgr 0)"
+
+PS1="${prompt_color}[\u@\h \W]\$${prompt_color_reset} "
 
 # Aliases
 # -------------
