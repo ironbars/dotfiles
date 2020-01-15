@@ -48,7 +48,7 @@ fi
 
 prompt_color_reset="$(tput sgr 0)"
 
-PS1="${prompt_color}[\u@\h \W]\$${prompt_color_reset} "
+PS1="\[${prompt_color}\][\u@\h \W]\$\[${prompt_color_reset}\] "
 
 # Aliases
 # -------------
