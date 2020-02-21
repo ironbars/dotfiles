@@ -19,6 +19,11 @@ arch_handler() {
 }
 
 
+debian_handler() {
+  sudo apt-get update && sudo apt-get --yes install yadm
+}
+
+
 # This is for servers where:
 # 1. you may not have root access
 # 2. extra software is not welcome
@@ -50,6 +55,9 @@ linux_handler() {
       ;;
     "fedora")
       fedora_handler
+      ;;
+    "debian"|"ubuntu")
+      debian_handler
       ;;
     "rhel"|"centos")
       rhel_handler
