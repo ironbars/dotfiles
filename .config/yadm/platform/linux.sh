@@ -5,9 +5,13 @@ MYADM_OS_VIM_PLUGINS=(
 
 
 myadm_check_linux() {
-  local os="$(grep '^ID=' /etc/os-release | cut -f2 -d"=")"
-  os="${os%\"}"
+  local os
+  os="$(grep '^ID=' /etc/os-release)"
+  # remove 'ID=' from the beginning of the string
+  os="${os#*=}"
+  # remove leading and trailing quotes, if present
   os="${os#\"}"
+  os="${os%\"}"
 
   source "${MYADM_DIR}"/platform/linux/"${os}".sh > /dev/null 2>&1
 
