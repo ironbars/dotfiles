@@ -27,18 +27,18 @@ _can_use_pkg_mgr() {
 }
     
     
+myadm_pkg_mgr_prep() {
+  sudo apt-get update
+}
+
+
 # MYADM_CHECK_INSTALLED_CMD=(dpkg -s)
 MYADM_INSTALL_CMD=(sudo apt-get install)
 
-if [[ ! _can_use_pkg_mgr ]]; then
+if ! _can_use_pkg_mgr; then
   source "${MYADM_DIR}"/platform/linux/server.sh
   return
 fi
 
 MYADM_CHECK_INSTALLED_CMD=(dpkg -s)
 MYADM_OS_PKGS=()
-
-
-myadm_pkg_mgr_prep() {
-  sudo apt-get update
-}

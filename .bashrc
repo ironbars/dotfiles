@@ -5,6 +5,9 @@
 # If not running interactively, dont do anything
 [[ $- != *i* ]] && return
 
+# Source common definitons
+source ~/.config/bash/common.sh
+
 # Check for supported platform and OS
 case "${OSTYPE}" in
   "darwin"*)
@@ -38,16 +41,10 @@ export HISTSIZE=10000
 export HISTFILESIZE=${HISTSIZE}
 export HISTCONTROL=ignoreboth
 export EDITOR=vim
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND="rg ${fzf_rg_opts[@]}"
 
 # Prompt
 # -------------
-if [[ -z ${prompt_color} ]]; then
-  prompt_color="$(tput setaf 6)"
-fi
-
-prompt_color_reset="$(tput sgr 0)"
-
 PS1="\[${prompt_color}\][\u@\h \W]\$\[${prompt_color_reset}\] "
 
 # Aliases
