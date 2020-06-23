@@ -4,5 +4,5 @@ pkg_search="apt-cache search"
 
 # This is necessary due to some weirdness with WSL 1 and Rust.  
 if [[ $(uname -r) = *Microsoft ]]; then
-  source wsl.sh
+  source ~/.config/bash/wsl.sh
 fi
