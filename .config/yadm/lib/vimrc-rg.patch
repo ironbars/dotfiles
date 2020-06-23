@@ -1,0 +1,4 @@
+38c38
+<   \ 'rg --line-number --no-heading --fixed-strings --ignore-case
+---
+>   \ 'rg --threads 1 --line-number --no-heading --fixed-strings --ignore-case

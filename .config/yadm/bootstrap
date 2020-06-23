@@ -59,7 +59,15 @@ main() {
       ;;
   esac
 
+  if [[ "$(type -t pre_bootstrap)" = "function" ]]; then
+    pre_bootstrap
+  fi
+
   bootstrap
+
+  if [[ "$(type -t post_bootstrap)" = "function" ]]; then
+    post_bootstrap
+  fi
 }
 
 

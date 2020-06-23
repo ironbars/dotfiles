@@ -26,7 +26,16 @@ _can_use_pkg_mgr() {
   return 0
 }
     
+
+_is_wsl() {
+  if [[ "$(uname -r)" = *Microsoft ]]; then
+    return 0
+  fi
+
+  return 1
+}
     
+
 myadm_pkg_mgr_prep() {
   sudo apt-get update
 }
@@ -34,6 +43,10 @@ myadm_pkg_mgr_prep() {
 
 # MYADM_CHECK_INSTALLED_CMD=(dpkg -s)
 MYADM_INSTALL_CMD=(sudo apt-get install)
+
+if _is_wsl; then
+  source "${MYADM_DIR}"/platform/linux/wsl.sh
+fi
 
 if ! _can_use_pkg_mgr; then
   source "${MYADM_DIR}"/platform/linux/server.sh
