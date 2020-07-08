@@ -7,7 +7,7 @@ os="${os#*=}"
 os="${os#\"}"
 os="${os%\"}"
 
-source "~/.config/bash/${os}.sh" > /dev/null 2>&1
+source "${HOME}/.config/bash/${os}.sh" > /dev/null 2>&1
 
 if (( $? != 0 )); then
   echo "Unsupported OS" >&2
