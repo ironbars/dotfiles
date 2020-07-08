@@ -183,11 +183,11 @@ gitup() {
 # gitclean - remove branches that aren't needed any longer
 # usage: gitclean (inside of a git repository)
 gitclean() {
-  declare -a branches="$(
+  declare -a branches=$(
     git branch | 
     sed 's/^[^a-zA-Z0-9]*//'g |
     egrep -v "^dev|^master"
-  )"
+  )
 
   for branch in "${branches[@]}"; do
     git branch -d "${branch}"
