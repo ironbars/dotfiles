@@ -6,4 +6,4 @@
 
 MYADM_INSTALL_CMD=(sudo yum install)
 
-source "${MYADM_DIR}"/platform/linux/server.sh
+source "${MYADM_DIR}/platform/linux/server.sh"

@@ -25,6 +25,8 @@ myadm_check_installed_pkgs() {
   for pkg in "${pkgs[@]}"; do
     "${MYADM_CHECK_INSTALLED_CMD[@]}" "${pkg}" > /dev/null 2>&1
 
-    [[ $? -ne 0 ]] && MYADM_PKGS_TO_INSTALL+=("${pkg}")
+    if (( $? != 0 )); then
+      MYADM_PKGS_TO_INSTALL+=("${pkg}")
+    fi
   done
 }

@@ -11,8 +11,8 @@
 MYADM_CHECK_INSTALLED_CMD=(/bin/true)
 MYADM_OS_PKGS=()
 
-_USER_BIN_PATH="${HOME}"/.local/bin
-_FZF_INSTALL_PATH="${HOME}"/.local/fzf
+_USER_BIN_PATH="${HOME}/.local/bin"
+_FZF_INSTALL_PATH="${HOME}/.local/fzf"
 _FZF_URL="https://github.com/junegunn/fzf.git"
 _RG_VERSION=11.0.2
 _RG_TARBALL="ripgrep-${_RG_VERSION}-x86_64-unknown-linux-musl.tar.gz"
@@ -23,14 +23,14 @@ _RG_URL="https://github.com/BurntSushi/ripgrep/releases/download/${_RG_VERSION}/
 _install_fzf() {
   git clone --depth 1 "${_FZF_URL}" "${_FZF_INSTALL_PATH}"
   (cd "${_FZF_INSTALL_PATH}" && ./install --bin)
-  ln -s "${_FZF_INSTALL_PATH}"/bin/fzf "${_USER_BIN_PATH}"/fzf
+  ln -s "${_FZF_INSTALL_PATH}/bin/fzf" "${_USER_BIN_PATH}/fzf"
 }
 
 
 _install_ripgrep() {
   curl -L -O "${_RG_URL}"
   tar xzf "${_RG_TARBALL}"
-  cp "${_RG_INSTALL_PATH}"/rg "${_USER_BIN_PATH}"
+  cp "${_RG_INSTALL_PATH}/rg" "${_USER_BIN_PATH}"
   rm "${_RG_TARBALL}"
   rm -rf "${_RG_INSTALL_PATH}"
 }

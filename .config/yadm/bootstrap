@@ -4,7 +4,7 @@ readonly MYADM_DIR="$(
   cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null 2>&1 && pwd
 )"
 readonly MYADM_COMMON_PKGS=("fzf" "ripgrep" "unrar")
-readonly MYADM_VIM_PLUGIN_DIR="${HOME}"/.vim/pack/dist/start
+readonly MYADM_VIM_PLUGIN_DIR="${HOME}/.vim/pack/dist/start"
 readonly MYADM_COMMON_VIM_PLUGINS=(
   "https://github.com/vim-airline/vim-airline.git"
   "https://github.com/junegunn/fzf.vim"
@@ -44,14 +44,14 @@ bootstrap() {
 
 
 main() {
-  source "${MYADM_DIR}"/lib/utils.sh
+  source "${MYADM_DIR}/lib/utils.sh"
 
   case "${OSTYPE}" in 
     "darwin"*)
-      source "${MYADM_DIR}"/platform/darwin.sh
+      source "${MYADM_DIR}/platform/darwin.sh"
       ;;
     "linux-gnu")
-      source "${MYADM_DIR}"/platform/linux.sh
+      source "${MYADM_DIR}/platform/linux.sh"
       myadm_check_linux
       ;;
     *)

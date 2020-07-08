@@ -36,9 +36,9 @@ shopt -s nocaseglob
 
 # Environment variables
 # -------------
-export PATH=${HOME}/.local/bin:${PATH}
+export PATH="${HOME}/.local/bin:${PATH}"
 export HISTSIZE=10000
-export HISTFILESIZE=${HISTSIZE}
+export HISTFILESIZE="${HISTSIZE}"
 export HISTCONTROL=ignoreboth
 export EDITOR=vim
 export FZF_DEFAULT_COMMAND="rg ${fzf_rg_opts[@]}"
@@ -70,46 +70,48 @@ alias search="${pkg_search}"
 # ex - archive extractor
 # usage: ex <archive>
 ex() {
-  if [[ -f "$1" ]]; then
-    case "$1" in
+  local archive="$1"
+
+  if [[ -f "${archive}" ]]; then
+    case "${archive}" in
       *.tar.bz2|*.tbz2)
-        tar xjf "$1"
+        tar xjf "${archive}"
         ;;
       *.tar.gz|*.tgz) 
-        tar xzf "$1"
+        tar xzf "${archive}"
         ;;
       *.tar.xz)
-        tar xJf "$1"
+        tar xJf "${archive}"
         ;;
       *.bz2)
-        bunzip2 "$1"
+        bunzip2 "${archive}"
         ;;
       *.rar)
-        unrar x "$1"
+        unrar x "${archive}"
         ;;
       *.gz)
-        gunzip "$1"
+        gunzip "${archive}"
         ;;
       *.tar)
-        tar xf "$1"
+        tar xf "${archive}"
         ;;
       *.zip)
-        unzip "$1"
+        unzip "${archive}"
         ;;
       *.Z)
-        uncompress "$1"
+        uncompress "${archive}"
         ;;
       *.7z)
-        7z x "$1"
+        7z x "${archive}"
         ;;
       *)
-        echo "'$1' cannot be extracted via ex()"
+        echo "'${archive}' cannot be extracted via ex()"
         return 1
         ;;
     esac
 
   else
-    echo "'$1' is not a valid file"
+    echo "'${archive}' is not a valid file"
     return 1
   fi
 }
@@ -117,18 +119,17 @@ ex() {
 # csource - compile and execute C source on the fly
 # usage: csource <source_file>
 csource() {
-  if [[ -z "$1" ]]; then
+  local src_file="$1"
+
+  if [[ -z "${src_file}" ]]; then
     echo "Missing operand"
     return 1
   fi
 
-  local output_path="$(
-    echo "$1" | 
-    sed -e "s/^.*\/\|^/\/tmp\//" | 
-    sed -e "s/\.c$//"
-  )"
+  local output_path="${src_file/*\//\/tmp\/}"
+  output_path="${output_path%.*}"
 
-  gcc "$1" -o "${output_path}" && "${output_path}";
+  gcc "${src_file}" -o "${output_path}" && "${output_path}"
   rm "${output_path}"
 
   return 0
@@ -143,7 +144,7 @@ cl() {
     dir="${HOME}"
   fi
 
-  if [[ -d "${dir}" || "${dir}" == "-" ]]; then
+  if [[ -d "${dir}" || "${dir}" = "-" ]]; then
     cd "$dir"
     ls
   else
@@ -155,7 +156,7 @@ cl() {
 utime() {
   i=1
   
-  while [[ ${i} -gt 0 ]]; do
+  while  (( i > 0 )); do
     echo "${i} seconds"
     (i++)
     sleep 1
@@ -165,7 +166,9 @@ utime() {
 # gitup - update local "production" branches with remote changes
 gitup() {
   local wanted="master"
-  local current="$(git rev-parse --abbrev-ref HEAD)"
+  local current
+  
+  current="$(git rev-parse --abbrev-ref HEAD)"
 
   for branch in "dev" "master"; do
     git checkout "${branch}"
@@ -199,9 +202,11 @@ gitready() {
 
 # gitpr - push current branch to remote to set up pull request
 gitpr() {
-  local current="$(git rev-parse --abbrev-ref HEAD)"
+  local current
 
-  if [[ "${current}" == "master" || "${current}" == "dev" ]]; then
+  current="$(git rev-parse --abbrev-ref HEAD)"
+  
+  if [[ "${current}" = "master" || "${current}" = "dev" ]]; then
     echo "ERROR: attempted to push directly to production branches"
     echo "Exiting"
     return 1
@@ -212,7 +217,7 @@ gitpr() {
 
 # hide - move file to a hidden location for temporary security
 hide() {
-  local hiding_place="${HOME}"/.fbn/
+  local hiding_place="${HOME}/.fbn/"
   local secret="$1"
 
   if [[ ! -d "${hiding_place}" ]]; then
