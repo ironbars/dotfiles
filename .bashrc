@@ -36,7 +36,7 @@ shopt -s nocaseglob
 
 # Environment variables
 # -------------
-export PATH="${HOME}/.local/bin:${PATH}"
+export PATH="${HOME}/.bin:${HOME}/.local/bin:${PATH}"
 export HISTSIZE=10000
 export HISTFILESIZE="${HISTSIZE}"
 export HISTCONTROL=ignoreboth
@@ -187,8 +187,8 @@ gitclean() {
 
   branches=($(
     git branch | 
-    sed 's/^[^a-zA-Z0-9]*//'g |
-    egrep -v "^dev|^master"
+    sed -n -r 's/^[^[:alnum:]]+([[:alnum:]])/\1/ p' |
+    grep -Ev '^dev|^master'
   ))
 
   for branch in "${branches[@]}"; do
