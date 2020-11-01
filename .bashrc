@@ -86,9 +86,6 @@ ex() {
       *.bz2)
         bunzip2 "${archive}"
         ;;
-      *.rar)
-        unrar x "${archive}"
-        ;;
       *.gz)
         gunzip "${archive}"
         ;;

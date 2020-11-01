@@ -3,7 +3,7 @@
 readonly MYADM_DIR="$(
   cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null 2>&1 && pwd
 )"
-readonly MYADM_COMMON_PKGS=("fzf" "ripgrep" "unrar")
+readonly MYADM_COMMON_PKGS=("fzf" "ripgrep")
 readonly MYADM_VIM_PLUGIN_DIR="${HOME}/.vim/pack/dist/start"
 readonly MYADM_COMMON_VIM_PLUGINS=(
   "https://github.com/vim-airline/vim-airline.git"
