@@ -55,8 +55,8 @@ alias ll="ls ${ll_opts}"
 alias grep="grep --color=tty -d skip"
 alias cp="cp -i"
 alias df="df -h"
-alias gpom="git push origin master"
-alias gpll="git pull origin master"
+alias gpom="git push origin main"
+alias gpll="git pull origin main"
 alias bashrc="vim ~/.bashrc"
 alias inputrc="vim ~/.config/bash/inputrc"
 alias vimrc="vim ~/.vim/vimrc"
@@ -162,12 +162,12 @@ utime() {
 
 # gitup - update local "production" branches with remote changes
 gitup() {
-  local wanted="master"
+  local wanted="main"
   local current
   
   current="$(git rev-parse --abbrev-ref HEAD)"
 
-  for branch in "dev" "master"; do
+  for branch in "dev" "main"; do
     git checkout "${branch}"
     git pull origin "${branch}"
   done
@@ -185,7 +185,7 @@ gitclean() {
   branches=($(
     git branch | 
     sed -n -r 's/^[^[:alnum:]]+([[:alnum:]])/\1/ p' |
-    grep -Ev '^dev|^master'
+    grep -Ev '^dev|^main'
   ))
 
   for branch in "${branches[@]}"; do
@@ -205,7 +205,7 @@ gitpr() {
 
   current="$(git rev-parse --abbrev-ref HEAD)"
   
-  if [[ "${current}" = "master" || "${current}" = "dev" ]]; then
+  if [[ "${current}" = "main" || "${current}" = "dev" ]]; then
     echo "ERROR: attempted to push directly to production branches"
     echo "Exiting"
     return 1
