@@ -6,7 +6,7 @@
 
 fedora_handler() {
   sudo dnf config-manager -y --add-repo \
-    https://download.opensuse.org/repositories/home:TheLocehiliosan:yadm/Fedora_30/home:TheLocehiliosan:yadm.repo
+    https://download.opensuse.org/repositories/home:TheLocehiliosan:yadm/Fedora_37/home:TheLocehiliosan:yadm.repo
   sudo dnf -y install yadm
 }
 

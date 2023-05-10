@@ -57,10 +57,10 @@ alias cp="cp -i"
 alias df="df -h"
 alias gpom="git push origin main"
 alias gpll="git pull origin main"
-alias bashrc="vim ~/.bashrc"
+alias shrc="vim ~/.bashrc"
 alias inputrc="vim ~/.config/bash/inputrc"
 alias vimrc="vim ~/.vim/vimrc"
-alias sb="source ~/.bashrc"
+alias src="source ~/.bashrc"
 alias add="${pkg_add}"
 alias remove="${pkg_remove}"
 alias search="${pkg_search}"
@@ -135,19 +135,9 @@ csource() {
 # cl - cd and ls in one command
 # usage: cl <directory>
 cl() {
-  local dir="$1"
+  local dir="${1:-$HOME}"
 
-  if [[ -z "${dir}" ]]; then
-    dir="${HOME}"
-  fi
-
-  if [[ -d "${dir}" || "${dir}" = "-" ]]; then
-    cd "$dir"
-    ls
-  else
-    echo "bash: cl: '${dir}': Directory not found"
-    return 1
-  fi
+  cd "${dir}" && ls
 }
 
 utime() {
