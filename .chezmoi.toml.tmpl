@@ -10,7 +10,7 @@
 
 {{- if eq .chezmoi.os "linux" -}}
 {{-   $shell = "bash" -}}
-{{-   $lsOpts = `-F --group-directories-first --time-style=+'%Y.%m.%s %H:%M' --color=auto` -}}
+{{-   $lsOpts = `-F --group-directories-first --time-style=+'%Y.%m.%d %H:%M' --color=auto` -}}
 {{-   $pkgAdd = "sudo dnf install" -}}
 {{-   $pkgRemove = "sudo dnf autoremove" -}}
 {{-   $pkgSearch = "dnf search" -}}
