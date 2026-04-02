@@ -8,14 +8,14 @@
 {{- $email := "pattonmj8503@gmail.com" -}}
 
 {{- if eq .chezmoi.os "linux" -}}
-{{-   $shell := "zsh" -}}
-{{-   $lsOpts := "-GFT" -}}
-{{-   $pkgAdd := "brew install" -}}
-{{-   $pkgRemove := "brew uninstall" -}}
-{{-   $pkgSearch := "brew search" -}}
+{{-   $shell := "bash" -}}
+{{-   $lsOpts := `-F --group-directories-first --time-style=+"%Y.%m.%s %H:%M" --color=auto` -}}
+{{-   $pkgAdd := "sudo dnf install" -}}
+{{-   $pkgRemove := "sudo dnf autoremove" -}}
+{{-   $pkgSearch := "dnf search" -}}
 {{-   $shellrc := printf "%s/.%s%s" `${HOME}` $shell "rc" -}}
-{{-   $prompt := `%F{cyan}[%n %~]%(!.#.\$) %F{none}` -}}
-{{-   $email := "pattonmj8503@gmail.com" -}}
+{{-   $prompt := `\[$(tput setaf 6)\][\u@\h \W]\$\[$(tput sgr 0)\] ` -}}
+{{-   $email := "marc.j.patton@vumc.org" -}}
 {{- end -}}
 
 [data]
