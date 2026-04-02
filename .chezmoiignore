@@ -1,7 +1,6 @@
-{{ if ne .chezmoi.os "darwin" }}
+{{- if ne .chezmoi.os "darwin" }}
 .zshrc
-{{ end }}
-
-{{ if ne .chezmoi.os "linux" }}
+{{- end }}
+{{- if ne .chezmoi.os "linux" }}
 .bashrc
-{{ end }}
+{{- end }}

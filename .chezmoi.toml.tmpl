@@ -1,24 +1,29 @@
+{{- $class := promptStringOnce . "class" "class (work/home)" -}}
 {{- $shell := "zsh" -}}
 {{- $lsOpts := "-GFT" -}}
 {{- $pkgAdd := "brew install" -}}
 {{- $pkgRemove := "brew uninstall" -}}
 {{- $pkgSearch := "brew search" -}}
-{{- $shellrc := printf "%s/.%s%s" `${HOME}` $shell "rc" -}}
+{{- $shellrc := printf "%s/.%src" .chezmoi.homeDir $shell -}}
 {{- $prompt := `%F{cyan}[%n %~]%(!.#.\$) %F{none}` -}}
 {{- $email := "pattonmj8503@gmail.com" -}}
 
 {{- if eq .chezmoi.os "linux" -}}
-{{-   $shell := "bash" -}}
-{{-   $lsOpts := `-F --group-directories-first --time-style=+"%Y.%m.%s %H:%M" --color=auto` -}}
-{{-   $pkgAdd := "sudo dnf install" -}}
-{{-   $pkgRemove := "sudo dnf autoremove" -}}
-{{-   $pkgSearch := "dnf search" -}}
-{{-   $shellrc := printf "%s/.%s%s" `${HOME}` $shell "rc" -}}
-{{-   $prompt := `\[$(tput setaf 6)\][\u@\h \W]\$\[$(tput sgr 0)\] ` -}}
-{{-   $email := "marc.j.patton@vumc.org" -}}
+{{-   $shell = "bash" -}}
+{{-   $lsOpts = `-F --group-directories-first --time-style=+'%Y.%m.%s %H:%M' --color=auto` -}}
+{{-   $pkgAdd = "sudo dnf install" -}}
+{{-   $pkgRemove = "sudo dnf autoremove" -}}
+{{-   $pkgSearch = "dnf search" -}}
+{{-   $shellrc = printf "%s/.%src" .chezmoi.homeDir $shell -}}
+{{-   $prompt = `\[$(tput setaf 6)\][\u@\h \W]\$\[$(tput sgr 0)\] ` -}}
+{{- end -}}
+
+{{- if eq $class "work" -}}
+{{-   $email = "marc.j.patton@vumc.org" -}}
 {{- end -}}
 
 [data]
+class = {{ $class | quote }}
 shell = {{ $shell | quote }}
 lsOpts = {{ $lsOpts | quote }}
 pkgAdd = {{ $pkgAdd | quote }}
