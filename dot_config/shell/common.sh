@@ -8,7 +8,7 @@ export FZF_DEFAULT_COMMAND="rg --files --no-ignore --hidden --follow --glob '!.g
 
 # Prompt
 # ------
-PS1="${prompt}"
+PS1="${prmpt}"
 
 # Aliases
 # -------
