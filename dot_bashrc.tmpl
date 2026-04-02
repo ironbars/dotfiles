@@ -1,0 +1,21 @@
+#
+# ~/.{{ .shell }}rc
+#
+
+source ~/.config/shell/{{ .shell }}.sh
+
+_shell_init() {
+  local ls_opts="{{ .lsOpts }}"
+  local pkg_add="{{ .pkgAdd }}"
+  local pkg_remove="{{ .pkgRemove }}"
+  local pkg_search="{{ .pkgSearch }}"
+  local shellrc="{{ .shellrc }}"
+  local prmpt="{{ .prompt }}"
+
+  source ~/.config/shell/common.sh
+
+  [[ -f ~/.config/shell/extras.sh ]] && source ~/.config/shell/extras.sh
+}
+
+_shell_init
+unset -f _shell_init
