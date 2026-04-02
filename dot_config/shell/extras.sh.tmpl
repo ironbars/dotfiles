@@ -1,0 +1,12 @@
+{{- if lookPath "starship" -}}
+eval "$(starship init {{ .shell }})"
+{{ end }}
+{{- if lookPath "zoxide" }}
+eval "$(zoxide init {{ .shell }})"
+
+zl() {
+  local dir="${1:-$HOME}"
+
+  z "${dir}" && ls
+}
+{{ end -}}
