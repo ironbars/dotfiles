@@ -1,6 +1,9 @@
 {{- if lookPath "starship" -}}
 eval "$(starship init {{ .shell }})"
 {{ end }}
+{{- if lookPath "fzf" -}}
+eval "$(fzf --{{ .shell }})"
+{{ end }}
 {{- if lookPath "zoxide" }}
 eval "$(zoxide init {{ .shell }})"
 

@@ -17,13 +17,21 @@ alias la="ls -a ${ls_opts}"
 alias ll="ls -l ${ls_opts}"
 alias lal="ls -al ${ls_opts}"
 alias grep="grep --color=tty -d skip"
-alias shrc=" vim ~/.config/shell/common.sh"
+alias shrc="vim ~/.config/shell/common.sh"
 alias src="source ${shellrc}"
 alias vimrc="vim ~/.config/vim/vimrc"
 alias vimrt="cd ~/.config/vim/pack/dist/start"
 alias add="${pkg_add}"
 alias remove="${pkg_remove}"
 alias search="${pkg_search}"
+alias che="chezmoi"
+alias chea="chezmoi apply"
+alias chedit="chezmoi edit"
+alias checd="chezmoi cd"
+alias chexec="chezmoi execute-template"
+alias chect="chezmoi edit-config-template"
+alias cvimrc="chezmoi edit ~/.config/vim/vimrc"
+alias cshrc="chezmoi edit ~/.config/shell/common.sh"
 
 # Functions
 # ---------
@@ -60,13 +68,13 @@ extr() {
         7z x "${archive}"
         ;;
       *)
-        printf '"%s" cannot be extracted via extr()' "${archive}" >&2
+        printf '"%s" cannot be extracted via extr()\n' "${archive}" >&2
         return 1
         ;;
     esac
 
   else
-    printf '"%s" is not a valid file' "${archive}" >&2
+    printf '"%s" is not a valid file\n' "${archive}" >&2
     return 1
   fi
 }

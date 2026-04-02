@@ -1,5 +1,5 @@
 "Basic configuration
-"================================================
+"===================
 set nocompatible
 set termguicolors
 syntax on
@@ -15,7 +15,7 @@ colorscheme nord
 "colorscheme zenburn
 
 "Indentation settings
-"================================================
+"====================
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -23,7 +23,7 @@ set smarttab
 filetype plugin indent on
 
 "Search settings
-"================================================
+"===============
 set showmatch
 set ignorecase
 set smartcase
@@ -38,7 +38,7 @@ nnoremap <silent> <leader>q :nohlsearch<CR>
 "  \ . shellescape(<q-args>), 0, <bang>0)
 
 "Extra key bindings
-"================================================
+"==================
 nnoremap j gj
 nnoremap k gk
 nnoremap <C-j> <C-W>j
@@ -50,6 +50,7 @@ nnoremap <leader>ev :split $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 "open buffers for selection
 nnoremap <leader>b :ls<CR>:b<space>
+"newlines
 nnoremap <leader>o o<esc>"_D
 nnoremap <leader>n i<CR><esc>
 "open fzf file search
@@ -60,7 +61,7 @@ nnoremap <leader>n i<CR><esc>
 inoremap <C-u> <esc>viwUea
 
 "Syntax highlighting (for strange extensions)
-"================================================
+"============================================
 augroup filetype_cmds
   autocmd!
   autocmd BufRead,BufNewFile *.sage set filetype=python
