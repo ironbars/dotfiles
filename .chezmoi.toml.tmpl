@@ -1,0 +1,29 @@
+{{- $shell := "zsh" -}}
+{{- $lsOpts := "-GFT" -}}
+{{- $pkgAdd := "brew install" -}}
+{{- $pkgRemove := "brew uninstall" -}}
+{{- $pkgSearch := "brew search" -}}
+{{- $shellrc := printf "%s/.%s%s" `${HOME}` $shell "rc" -}}
+{{- $prompt := `%F{cyan}[%n %~]%(!.#.\$) %F{none}` -}}
+{{- $email := "pattonmj8503@gmail.com" -}}
+
+{{- if eq .chezmoi.os "linux" -}}
+{{-   $shell := "zsh" -}}
+{{-   $lsOpts := "-GFT" -}}
+{{-   $pkgAdd := "brew install" -}}
+{{-   $pkgRemove := "brew uninstall" -}}
+{{-   $pkgSearch := "brew search" -}}
+{{-   $shellrc := printf "%s/.%s%s" `${HOME}` $shell "rc" -}}
+{{-   $prompt := `%F{cyan}[%n %~]%(!.#.\$) %F{none}` -}}
+{{-   $email := "pattonmj8503@gmail.com" -}}
+{{- end -}}
+
+[data]
+shell = {{ $shell | quote }}
+lsOpts = {{ $lsOpts | quote }}
+pkgAdd = {{ $pkgAdd | quote }}
+pkgRemove = {{ $pkgRemove | quote }}
+pkgSearch = {{ $pkgSearch | quote }}
+shellrc = {{ $shellrc | quote }}
+prompt = {{ $prompt | quote }}
+email = {{ $email | quote }}
