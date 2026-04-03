@@ -5,6 +5,7 @@ export PATH="${GOPATH}/bin:${HOME}/bin:${HOME}/.local/bin:${PATH}"
 export HISTSIZE=10000
 export EDITOR=vim
 export FZF_DEFAULT_COMMAND="rg --files --no-ignore --hidden --follow --glob '!.git/*'"
+export FZF_DEFAULT_OPTS_FILE="${HOME}/.config/fzf/config"
 
 # Prompt
 # ------
@@ -107,11 +108,7 @@ gitup() {
 gitclean() {
   local branches
 
-  branches=($(
-    git branch | 
-    sed -n -r 's/^[^[:alnum:]]+([[:alnum:]])/\1/ p' |
-    grep -Ev '^dev|^main'
-  ))
+  IFS=$'\n' read -r -d '' -a branches < <(git branch --format='%(refname:short)' | grep -v '^master$')
 
   for branch in "${branches[@]}"; do
     git branch -d "${branch}"
