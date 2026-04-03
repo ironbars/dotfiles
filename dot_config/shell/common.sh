@@ -32,7 +32,7 @@ alias checd="chezmoi cd"
 alias chexec="chezmoi execute-template"
 alias chect="chezmoi edit-config-template"
 alias cvimrc="chezmoi edit ~/.config/vim/vimrc"
-alias cshrc="chezmoi edit ~/.config/shell/common.sh"
+alias chesh="chezmoi edit ~/.config/shell/common.sh"
 
 # Functions
 # ---------

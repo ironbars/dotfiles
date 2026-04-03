@@ -3,6 +3,14 @@ eval "$(starship init {{ .shell }})"
 {{ end }}
 {{- if lookPath "fzf" -}}
 eval "$(fzf --{{ .shell }})"
+
+fc() {
+  local dir
+
+  dir="$(
+    find "${1:-.}" -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m
+  )" && cd "${dir}"
+}
 {{ end }}
 {{- if lookPath "zoxide" }}
 eval "$(zoxide init {{ .shell }})"
