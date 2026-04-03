@@ -9,10 +9,6 @@ set backspace=indent,eol,start
 set laststatus=2
 set ruler
 set number
-"colorscheme apprentice
-colorscheme nord
-"colorscheme solarized
-"colorscheme zenburn
 
 "Indentation settings
 "====================
@@ -75,3 +71,28 @@ augroup END
 "let g:airline_theme = 'ravenpower'
 "let g:airline_theme = 'apprentice'
 "let g:airline_theme='owo'
+
+"Plugins
+"=======
+call plug#begin('~/.config/vim/addons')
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+"syntax
+Plug 'keysmashes/vim-lilypond'
+Plug 'google/vim-jsonnet'
+
+"colors
+Plug 'romainl/Apprentice', { 'as': 'apprentice' }
+Plug 'nordtheme/vim', { 'as': 'nord' }
+Plug 'jnurmine/Zenburn', { 'as': 'zenburn' }
+Plug 'altercation/vim-colors-solarized', { 'as': 'solarized' }
+call plug#end()
+
+"Colors
+"======
+"this needs to be here since we're treating colorschemes as plugins
+"colorscheme apprentice
+colorscheme nord
+"colorscheme solarized
+"colorscheme zenburn
