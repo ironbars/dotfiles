@@ -48,7 +48,7 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>b :ls<CR>:b<space>
 "newlines
 nnoremap <leader>o o<esc>"_D
-nnoremap <leader>n i<CR><esc>
+nnoremap <leader>j i<CR><esc>
 "open fzf file search
 "nnoremap <leader>fs :Files<CR>
 "open rg and fzf to search inside files
@@ -78,17 +78,33 @@ augroup END
 call plug#begin('~/.config/vim/addons')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
+Plug 'junegunn/fzf.vim'
+Plug 'vimwiki/vimwiki'
+Plug 'alok/notational-fzf-vim'
 
 "syntax
 Plug 'keysmashes/vim-lilypond'
 Plug 'google/vim-jsonnet'
 
 "colors
-Plug 'romainl/Apprentice', { 'as': 'apprentice' }
-Plug 'nordtheme/vim', { 'as': 'nord' }
-Plug 'jnurmine/Zenburn', { 'as': 'zenburn' }
-Plug 'altercation/vim-colors-solarized', { 'as': 'solarized' }
+Plug 'romainl/Apprentice', {'as': 'apprentice'}
+Plug 'nordtheme/vim', {'as': 'nord'}
+Plug 'jnurmine/Zenburn', {'as': 'zenburn'}
+Plug 'altercation/vim-colors-solarized', {'as': 'solarized'}
 call plug#end()
+
+"Plugin configurations
+"=====================
+let g:nv_search_paths = ['~/notes']
+let g:nv_create_note_key = 'ctrl-n'
+let g:nv_create_if_no_results = 1
+let g:nv_create_note_window = 'edit'
+let g:vimwiki_list = [{ 'path': '~/notes', 'syntax': 'markdown', 'ext': 'md'}]
+let g:vimwiki_global_ext = 0
+let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown'}
+
+nnoremap <leader>n :NV<CR>
 {{- end }}
 
 "Colors

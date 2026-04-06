@@ -30,6 +30,7 @@ alias chedit="chezmoi edit"
 alias checd="chezmoi cd"
 alias chexec="chezmoi execute-template"
 alias chect="chezmoi edit-config-template"
+alias notes="vim -c 'NV'"
 
 # Functions
 # ---------
