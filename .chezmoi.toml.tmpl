@@ -13,7 +13,7 @@
 {{-   $shell = "bash" -}}
 {{-   $lsOpts = `-F --group-directories-first --time-style=+'%Y.%m.%d %H:%M' --color=auto` -}}
 {{-   $pkgAdd = "sudo dnf install" -}}
-{{-   $pkgRemove = "sudo dnf autoremove" -}}
+{{-   $pkgRemove = "sudo dnf remove" -}}
 {{-   $pkgSearch = "dnf search" -}}
 {{-   $shellrc = printf "%s/.%src" .chezmoi.homeDir $shell -}}
 {{-   $prompt = `\[$(tput setaf 6)\][\u@\h \W]\$\[$(tput sgr 0)\] ` -}}
