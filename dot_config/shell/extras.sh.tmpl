@@ -1,8 +1,17 @@
 {{- if lookPath "starship" -}}
-eval "$(starship init {{ .shell }})"
+# starship
+# --------
+source <(starship init {{ .shell }})
 {{ end }}
-{{- if lookPath "fzf" -}}
-eval "$(fzf --{{ .shell }})"
+{{- if lookPath "fzf" }}
+# fzf
+# ---
+export FZF_DEFAULT_OPTS_FILE="${HOME}/.config/fzf/config"
+{{-   if lookPath "rg" }}
+export FZF_DEFAULT_COMMAND="rg --files --no-ignore --hidden --follow --glob '!.git/*'"
+{{-   end }}
+
+source <(fzf --{{ .shell }})
 
 fc() {
   local dir
@@ -13,7 +22,9 @@ fc() {
 }
 {{ end }}
 {{- if lookPath "zoxide" }}
-eval "$(zoxide init {{ .shell }})"
+# zoxide
+# ------
+source <(zoxide init {{ .shell }})
 
 zl() {
   local dir="${1:-$HOME}"

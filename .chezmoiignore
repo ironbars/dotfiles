@@ -4,3 +4,6 @@
 {{- if ne .chezmoi.os "linux" }}
 .bashrc
 {{- end }}
+{{- if not (lookPath "fzf") }}
+.config/fzf
+{{- end }}

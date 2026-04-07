@@ -4,8 +4,7 @@ export GOPATH="${HOME}/.local/go"
 export PATH="${GOPATH}/bin:${HOME}/bin:${HOME}/.local/bin:${PATH}"
 export HISTSIZE=10000
 export EDITOR=vim
-export FZF_DEFAULT_COMMAND="rg --files --no-ignore --hidden --follow --glob '!.git/*'"
-export FZF_DEFAULT_OPTS_FILE="${HOME}/.config/fzf/config"
+export COLORTERM=truecolor
 
 # Prompt
 # ------
@@ -30,7 +29,6 @@ alias chedit="chezmoi edit"
 alias checd="chezmoi cd"
 alias chexec="chezmoi execute-template"
 alias chect="chezmoi edit-config-template"
-alias notes="vim -c 'NV'"
 
 # Functions
 # ---------
