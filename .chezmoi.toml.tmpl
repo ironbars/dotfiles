@@ -6,6 +6,7 @@
 {{- $pkgSearch := "brew search" -}}
 {{- $shellrc := printf "%s/.%src" .chezmoi.homeDir $shell -}}
 {{- $prompt := `%F{cyan}[%n %~]%(!.#.\$) %F{none}` -}}
+{{- $editor := "vim" -}}
 {{- $email := "pattonmj8503@gmail.com" -}}
 
 {{- if eq .chezmoi.os "linux" -}}
@@ -22,6 +23,10 @@
 {{-   $email = "marc.j.patton@vumc.org" -}}
 {{- end -}}
 
+{{- if lookPath "nvim" }}
+{{-    $editor = "nvim" -}}
+{{- end -}}
+
 [data]
 class = {{ $class | quote }}
 shell = {{ $shell | quote }}
@@ -31,4 +36,5 @@ pkgRemove = {{ $pkgRemove | quote }}
 pkgSearch = {{ $pkgSearch | quote }}
 shellrc = {{ $shellrc | quote }}
 prompt = {{ $prompt | quote }}
+editor = {{ $editor | quote }}
 email = {{ $email | quote }}

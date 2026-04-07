@@ -3,8 +3,7 @@
 export GOPATH="${HOME}/.local/go"
 export PATH="${GOPATH}/bin:${HOME}/bin:${HOME}/.local/bin:${PATH}"
 export HISTSIZE=10000
-export EDITOR=vim
-export COLORTERM=truecolor
+export EDITOR="${editor}"
 
 # Prompt
 # ------
