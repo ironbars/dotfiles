@@ -1,0 +1,7 @@
+font-family = "Inconsolata Nerd Font Mono"
+font-size = 16
+theme = "GitHub Dark Dimmed"
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+copy-on-select = clipboard
