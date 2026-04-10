@@ -2,13 +2,13 @@ return {
   {
     "romainl/Apprentice",
     branch = "fancylines-and-neovim",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     name = "apprentice",
   },
   {
     "nordtheme/vim",
-    lazy = true,
+    lazy = false,
+    priority = 1000,
     name = "nord",
   },
   {

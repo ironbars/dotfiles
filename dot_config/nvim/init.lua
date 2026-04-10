@@ -82,7 +82,7 @@ require("config.lazy")
 
 -- Colors
 -- ------
-vim.cmd("colorscheme apprentice")
--- vim.cmd("colorscheme nord")
+-- vim.cmd("colorscheme apprentice")
+vim.cmd("colorscheme nord")
 -- vim.cmd("colorscheme solarized")
 -- vim.cmd("colorscheme zenburn")
