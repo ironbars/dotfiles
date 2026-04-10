@@ -7,7 +7,13 @@
 {{- $shellrc := printf "%s/.%src" .chezmoi.homeDir $shell -}}
 {{- $prompt := `%F{cyan}[%n %~]%(!.#.\$) %F{none}` -}}
 {{- $editor := "vim" -}}
+{{- $editorrc := printf "%s/.config/vim/vimrc" .chezmoi.homeDir -}}
 {{- $email := "pattonmj8503@gmail.com" -}}
+{{- $hasNvim := not (eq (lookPath "nvim") "") -}}
+
+{{- if not $hasNvim -}}
+{{-   $hasNvim = promptBoolOnce . "hasNvim" "Deploy neovim config" -}}
+{{- end -}}
 
 {{- if eq .chezmoi.os "linux" -}}
 {{-   $shell = "bash" -}}
@@ -23,8 +29,9 @@
 {{-   $email = "marc.j.patton@vumc.org" -}}
 {{- end -}}
 
-{{- if lookPath "nvim" }}
-{{-    $editor = "nvim" -}}
+{{- if $hasNvim -}}
+{{-   $editor = "nvim" -}}
+{{-   $editorrc = printf "%s/.config/nvim/init.lua" .chezmoi.homeDir -}}
 {{- end -}}
 
 [data]
@@ -37,4 +44,5 @@ pkgSearch = {{ $pkgSearch | quote }}
 shellrc = {{ $shellrc | quote }}
 prompt = {{ $prompt | quote }}
 editor = {{ $editor | quote }}
+editorrc = {{ $editorrc | quote }}
 email = {{ $email | quote }}

@@ -7,3 +7,9 @@
 {{- if not (lookPath "fzf") }}
 .config/fzf
 {{- end }}
+{{- if ne .editor "nvim" }}
+.config/nvim
+{{- end }}
+{{- if ne .editor "vim" }}
+.config/vim
+{{- end }}
