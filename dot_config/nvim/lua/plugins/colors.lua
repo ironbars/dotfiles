@@ -2,23 +2,31 @@ return {
   {
     "romainl/Apprentice",
     branch = "fancylines-and-neovim",
-    lazy = true,
+    lazy = false,
     name = "apprentice",
   },
   {
-    "nordtheme/vim",
+    "gbprod/nord.nvim",
     lazy = false,
-    priority = 1000,
     name = "nord",
+    priority = 1000,
+    config = function()
+      vim.cmd("colorscheme nord")
+    end,
   },
   {
     "jnurmine/Zenburn",
-    lazy = true,
+    lazy = false,
     name = "zenburn",
   },
   {
     "altercation/vim-colors-solarized",
-    lazy = true,
+    lazy = false,
     name = "solarized",
+  },
+  {
+    "tiagovla/tokyodark.nvim",
+    lazy = false,
+    name = "tokyodark",
   },
 }

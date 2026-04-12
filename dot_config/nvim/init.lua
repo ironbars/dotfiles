@@ -72,17 +72,18 @@ vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
   group = filetypegroup,
   command = "set filetype=toml",
 })
+vim.api.nvim_create_autocmd({"BufEnter"}, {
+  pattern = "*.md",
+  group = filetypegroup,
+  callback = function()
+    local filepath = vim.fn.expand("%:p")
+    local notes_dir = vim.fn.expand(vim.g.wiki_root)
+    if filepath:sub(1, #notes_dir) == notes_dir then
+      vim.cmd("WikiEnable")
+    end
+  end,
+})
 
 -- Plugins
 -- -------
 require("config.lazy")
-
--- Plugin configurations
--- ---------------------
-
--- Colors
--- ------
--- vim.cmd("colorscheme apprentice")
-vim.cmd("colorscheme nord")
--- vim.cmd("colorscheme solarized")
--- vim.cmd("colorscheme zenburn")
