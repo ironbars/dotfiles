@@ -1,0 +1,47 @@
+#!/bin/{{ .shell }}
+# notes -- open notes in neovim, or list tags
+# Usage: notes [-t|--tags] [query]
+
+NOTES_DIR="$HOME/notes"
+
+# Parse flags
+LIST_TAGS=0
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -t|--tags)
+      LIST_TAGS=1
+      shift
+      ;;
+    -h|--help)
+      echo "Usage: notes [-t|--tags] [query]"
+      echo ""
+      echo "  notes              Open envy picker"
+      echo "  notes 'query'      Open envy picker with initial query"
+      echo "  notes -t           List all tags"
+      echo "  notes -t 'query'   List tags matching query"
+      exit 0
+      ;;
+    *)
+      break
+      ;;
+  esac
+done
+
+QUERY="${1:-}"
+
+if [[ $LIST_TAGS -eq 1 ]]; then
+  if [[ -n "$QUERY" ]]; then
+    rg -oIN --no-heading -g '*.md' '@[A-Za-z0-9_-]+' "$NOTES_DIR" \
+      | sort -u \
+      | grep -i "$QUERY"
+  else
+    rg -oIN --no-heading -g '*.md' '@[A-Za-z0-9_-]+' "$NOTES_DIR" \
+      | sort -u
+  fi
+  exit 0
+fi
+
+# Open neovim in notes directory
+cd "$NOTES_DIR" || exit 1
+
+nvim -c "autocmd VimEnter * ++once lua require('envy').open({initial_query = '$QUERY'})"

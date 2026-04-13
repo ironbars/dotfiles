@@ -9,6 +9,7 @@
 {{- end }}
 {{- if ne .editor "nvim" }}
 .config/nvim
+.local/bin/notes
 {{- end }}
 {{- if ne .editor "vim" }}
 .config/vim
