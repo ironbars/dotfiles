@@ -31,4 +31,9 @@ zl() {
 
   z "${dir}" && ls
 }
-{{ end -}}
+{{ end }}
+{{- if eq .editor "nvim" }}
+# neovim
+# ------
+alias vim="nvim"
+{{ end }}
