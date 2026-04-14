@@ -6,7 +6,7 @@ return {
     name = "apprentice",
   },
   {
-    "gbprod/nord.nvim",
+    "ironbars/nord.nvim",
     lazy = false,
     name = "nord",
     priority = 1000,
