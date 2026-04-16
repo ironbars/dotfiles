@@ -25,7 +25,6 @@ vim.opt.smartcase = true
 vim.opt.incsearch = true
 vim.opt.hlsearch = true
 vim.keymap.set("n", "<Leader>q", "<cmd>nohlsearch<CR>", {silent = true})
--- nnoremap <silent> <leader>q :nohlsearch<CR>
 
 -- Extra key bindings
 -- ------------------
@@ -87,3 +86,18 @@ vim.api.nvim_create_autocmd({"BufEnter"}, {
 -- Plugins
 -- -------
 require("config.lazy")
+
+-- GUI settings
+-- ------------
+if vim.g.neovide then
+  vim.opt.guifont = "Inconsolata Nerd Font Mono:h16"
+  vim.cmd("colorscheme solarized")
+
+  local function paste()
+    vim.api.nvim_paste(vim.fn.getreg('+'), true, -1)
+  end
+
+  vim.keymap.set({"n", "v"}, "<D-v>", '"+p', {desc = "Paste from system clipboard"})
+  vim.keymap.set("i", "<D-v>", paste, {desc = "Paste in insert mode"})
+  vim.keymap.set("c", "<D-v>", "<C-R>+", {desc = "Paste in command mode"})
+end
