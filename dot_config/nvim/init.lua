@@ -97,7 +97,13 @@ if vim.g.neovide then
     vim.api.nvim_paste(vim.fn.getreg('+'), true, -1)
   end
 
+  local function envy()
+    vim.cmd("%bd")
+    require("envy").open()
+  end
+
   vim.keymap.set({"n", "v"}, "<D-v>", '"+p', {desc = "Paste from system clipboard"})
   vim.keymap.set("i", "<D-v>", paste, {desc = "Paste in insert mode"})
   vim.keymap.set("c", "<D-v>", "<C-R>+", {desc = "Paste in command mode"})
+  vim.keymap.set("n", "<Leader>en", envy, {desc = "Open envy.nvim"})
 end
