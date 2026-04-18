@@ -8,11 +8,7 @@ return {
   {
     "gbprod/nord.nvim",
     lazy = false,
-    priority = 1000,
     name = "nord",
-    config = function()
-      vim.cmd("colorscheme nord")
-    end
   },
   {
     "jnurmine/Zenburn",
@@ -31,7 +27,7 @@ return {
     config = function()
       require("solarized-osaka").setup({
         styles = {
-          keywords = {},
+          keywords = {italic = false},
           functions = {},
         },
       })
@@ -61,5 +57,19 @@ return {
     "Domeee/mosel.nvim",
     lazy = false,
     name = "mosel",
+  },
+  {
+    "rebelot/kanagawa.nvim",
+    lazy = false,
+    name = "kanagawa",
+  },
+  {
+    "catppuccin/nvim",
+    lazy = false,
+    name = "catpuccin",
+    priority = 1000,
+    config = function()
+      vim.cmd("colorscheme catppuccin-macchiato")
+    end
   },
 }
