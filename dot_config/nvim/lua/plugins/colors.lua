@@ -8,11 +8,11 @@ return {
   {
     "gbprod/nord.nvim",
     lazy = false,
-    name = "nord",
     priority = 1000,
+    name = "nord",
     config = function()
       vim.cmd("colorscheme nord")
-    end,
+    end
   },
   {
     "jnurmine/Zenburn",
@@ -25,8 +25,41 @@ return {
     name = "solarized",
   },
   {
+    "craftzdog/solarized-osaka.nvim",
+    lazy = false,
+    name = "solarized-osaka",
+    config = function()
+      require("solarized-osaka").setup({
+        styles = {
+          keywords = {},
+          functions = {},
+        },
+      })
+    end,
+  },
+  {
     "tiagovla/tokyodark.nvim",
     lazy = false,
     name = "tokyodark",
+  },
+  {
+    "embark-theme/vim",
+    lazy = false,
+    name = "embark",
+  },
+  {
+    "thesimonho/kanagawa-paper.nvim",
+    lazy = false,
+    name = "kanagawa-paper",
+  },
+  {
+    "rose-pine/neovim",
+    lazy = false,
+    name = "rose-pine",
+  },
+  {
+    "Domeee/mosel.nvim",
+    lazy = false,
+    name = "mosel",
   },
 }

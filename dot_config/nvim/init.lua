@@ -91,13 +91,16 @@ require("config.lazy")
 -- ------------
 if vim.g.neovide then
   vim.opt.guifont = "Inconsolata Nerd Font Mono:h16"
-  vim.cmd("colorscheme solarized")
+  vim.cmd("colorscheme kanagawa-paper")
 
   local function paste()
     vim.api.nvim_paste(vim.fn.getreg('+'), true, -1)
   end
 
   local function envy()
+    if vim.bo.modified then
+      vim.cmd("w")
+    end
     vim.cmd("%bd")
     require("envy").open()
   end
