@@ -16,11 +16,6 @@ return {
     name = "zenburn",
   },
   {
-    "altercation/vim-colors-solarized",
-    lazy = false,
-    name = "solarized",
-  },
-  {
     "craftzdog/solarized-osaka.nvim",
     lazy = false,
     name = "solarized-osaka",
