@@ -9,6 +9,9 @@
 {{- if not (lookPath "fzf") }}
 .config/fzf
 {{- end }}
+{{- if not (lookPath "ghostty") }}
+.config/ghostty
+{{- end }}
 {{- if ne .editor "nvim" }}
 .config/nvim
 .local/bin/notes
