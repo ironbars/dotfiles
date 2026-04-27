@@ -28,6 +28,7 @@ vim.keymap.set("n", "<Leader>q", "<cmd>nohlsearch<CR>", {silent = true})
 
 -- Extra key bindings
 -- ------------------
+-- easy movement
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
 vim.keymap.set("n", "<C-j>", "<C-W>j")
@@ -37,6 +38,8 @@ vim.keymap.set("n", "<C-l>", "<C-W>l")
 -- edit and source init.lua on the fly
 vim.keymap.set("n", "<Leader>ev", "<cmd>split $MYVIMRC<CR>")
 vim.keymap.set("n", "<Leader>sv", "<cmd>source $MYVIMRC<CR>")
+-- quick uppercase word
+vim.keymap.set("i", "<C-u>", "<esc>viwUea")
 
 -- Syntax highlighting (for strange extenstions)
 -- ---------------------------------------------

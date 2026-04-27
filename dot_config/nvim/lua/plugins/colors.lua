@@ -34,11 +34,6 @@ return {
     name = "tokyodark",
   },
   {
-    "embark-theme/vim",
-    lazy = false,
-    name = "embark",
-  },
-  {
     "thesimonho/kanagawa-paper.nvim",
     lazy = false,
     name = "kanagawa-paper",
@@ -47,11 +42,6 @@ return {
     "rose-pine/neovim",
     lazy = false,
     name = "rose-pine",
-  },
-  {
-    "Domeee/mosel.nvim",
-    lazy = false,
-    name = "mosel",
   },
   {
     "rebelot/kanagawa.nvim",

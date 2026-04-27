@@ -1,5 +1,13 @@
-font-family = "Inconsolata Nerd Font"
-font-size = 16
+#font-family = "Inconsolata Nerd Font"
+#font-size = 16
+font-family = "ZenbonesBrainy Nerd Font"
+font-size = 14
+#font-family = "IoskeleyMono Nerd Font"
+#font-size = 14
+#font-family = "Terminess Nerd Font"
+#font-size = 16
+#font-family = "CommitMono Nerd Font"
+#font-size = 14
 theme = "GitHub Dark Dimmed"
 cursor-style = block
 cursor-style-blink = false
