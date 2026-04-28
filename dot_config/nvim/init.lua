@@ -85,6 +85,11 @@ vim.api.nvim_create_autocmd({"BufEnter"}, {
     end
   end,
 })
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {"go", "python", "yaml", "markdown", "lua"},
+  group = filetypegroup,
+  callback = function() vim.treesitter.start() end,
+})
 
 -- Plugins
 -- -------

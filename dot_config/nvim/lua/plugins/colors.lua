@@ -9,11 +9,15 @@ return {
     "gbprod/nord.nvim",
     lazy = false,
     name = "nord",
+    priority = 1000,
+    config = function()
+      vim.cmd("colorscheme nord")
+    end,
   },
   {
-    "jnurmine/Zenburn",
+    "EdenEast/nightfox.nvim",
     lazy = false,
-    name = "zenburn",
+    name = "nightfox",
   },
   {
     "craftzdog/solarized-osaka.nvim",
@@ -29,9 +33,9 @@ return {
     end,
   },
   {
-    "tiagovla/tokyodark.nvim",
+    "rakr/vim-one",
     lazy = false,
-    name = "tokyodark",
+    name = "one",
   },
   {
     "thesimonho/kanagawa-paper.nvim",
@@ -49,17 +53,30 @@ return {
     name = "kanagawa",
   },
   {
+    "cocopon/iceberg.vim",
+    lazy = false,
+    name = "iceberg",
+  },
+  {
+    "bluz71/vim-nightfly-colors",
+    lazy = false,
+    name = "nightfly",
+  },
+  {
+    "Softmotions/vim-dark-frost-theme",
+    lazy = false,
+    name = "darkfrost",
+  },
+  {
     "catppuccin/nvim",
     lazy = false,
     name = "catpuccin",
-    priority = 1000,
     config = function()
       require("catppuccin").setup({
         styles = {
           conditionals = {},
         },
       })
-      vim.cmd("colorscheme catppuccin-macchiato")
     end
   },
 }
