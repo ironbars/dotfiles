@@ -79,4 +79,16 @@ return {
       })
     end
   },
+  {
+    "ellisonleao/gruvbox.nvim",
+    lazy = false,
+    name = "gruvbox",
+    config = function()
+      require("gruvbox").setup({
+        italic = {
+          strings = false,
+        },
+      })
+    end,
+  },
 }

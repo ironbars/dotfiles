@@ -1,21 +1,22 @@
+-- Plugins
+-- -------
+vim.g.mapleader = ","
+require("config.lazy")
+
 -- Basic configuration
 -- -------------------
-vim.opt.compatible = false
 vim.opt.termguicolors = true
 vim.cmd("syntax on")
-vim.g.mapleader = ","
 vim.opt.backspace = {"indent", "eol", "start"}
 vim.opt.laststatus = 2
 vim.opt.ruler = true
 vim.opt.number = true
 
--- Indentation settings
+-- Default indentation settings
 -- --------------------
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
-vim.opt.smarttab = true
-vim.cmd("filetype plugin indent on")
 
 -- Search settings
 -- ---------------
@@ -44,56 +45,21 @@ vim.keymap.set("i", "<C-u>", "<esc>viwUea")
 -- Syntax highlighting (for strange extenstions)
 -- ---------------------------------------------
 local filetypegroup = vim.api.nvim_create_augroup("filetypes", {clear = true})
-vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
-  pattern = "*.sage",
-  group = filetypegroup,
-  command = "set filetype=python",
-})
-vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
-  pattern = "*.adoc",
-  group = filetypegroup,
-  command = "set filetype=asciidoc",
-})
-vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
-  pattern = "*bashrc*",
-  group = filetypegroup,
-  command = "set filetype=sh",
-})
-vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
-  pattern = "*bash_*",
-  group = filetypegroup,
-  command = "set filetype=sh",
-})
-vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
-  pattern = "*.pp",
-  group = filetypegroup,
-  command = "set filetype=puppet",
-})
-vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
-  pattern = "poetry.lock",
-  group = filetypegroup,
-  command = "set filetype=toml",
-})
-vim.api.nvim_create_autocmd({"BufEnter"}, {
-  pattern = "*.md",
-  group = filetypegroup,
-  callback = function()
-    local filepath = vim.fn.expand("%:p")
-    local notes_dir = vim.fn.expand(vim.g.wiki_root)
-    if filepath:sub(1, #notes_dir) == notes_dir then
-      vim.cmd("WikiEnable")
-    end
-  end,
-})
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = {"go", "python", "yaml", "markdown", "lua"},
-  group = filetypegroup,
-  callback = function() vim.treesitter.start() end,
-})
-
--- Plugins
--- -------
-require("config.lazy")
+local ft_mappings = {
+  ["*.sage"] = "python",
+  ["*.adoc"] = "asciidoc",
+  ["*bashrc*"] = "sh",
+  ["*base_*"] = "sh",
+  ["*.pp"] = "puppet",
+  ["poetry.lock"] = "toml",
+}
+for pattern, ft in pairs(ft_mappings) do
+  vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+    pattern = pattern,
+    group = filetypegroup,
+    command = "set filetype=" .. ft,
+  })
+end
 
 -- GUI settings
 -- ------------
