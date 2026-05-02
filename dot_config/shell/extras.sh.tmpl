@@ -24,12 +24,12 @@ fc() {
 {{- if lookPath "zoxide" }}
 # zoxide
 # ------
+export _ZO_DATA_DIR="${HOME}/.local/share/zoxide"
+
 source <(zoxide init {{ .shell }})
 
 zl() {
-  local dir="${1:-$HOME}"
-
-  z "${dir}" && ls
+  z "$@" && ls
 }
 {{ end }}
 {{- if eq .editor "nvim" }}

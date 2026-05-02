@@ -16,6 +16,9 @@
 .config/nvim
 .local/bin/notes
 {{- end }}
+{{- if ne .class "home" }}
+.config/nvim/lua/plugins/treesitter.lua
+{{- end }}
 {{- if ne .editor "vim" }}
 .config/vim
 {{- end }}
