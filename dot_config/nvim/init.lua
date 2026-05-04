@@ -52,6 +52,7 @@ local ft_mappings = {
   ["*base_*"] = "sh",
   ["*.pp"] = "puppet",
   ["poetry.lock"] = "toml",
+  ["*.plist"] = "xml",
 }
 for pattern, ft in pairs(ft_mappings) do
   vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
