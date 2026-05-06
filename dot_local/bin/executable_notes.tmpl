@@ -31,11 +31,11 @@ QUERY="${1:-}"
 
 if [[ $LIST_TAGS -eq 1 ]]; then
   if [[ -n "$QUERY" ]]; then
-    rg -oIN --no-heading -g '*.md' --pcre2 '(?:^|(?<=\s))@[A-Za-z0-9_-]+' "$NOTES_DIR" \
+    rg -oIN --no-heading -g '*.md' --pcre2 '(?:^|(?<=\s))::[A-Za-z0-9_-]+' "$NOTES_DIR" \
       | sort -u \
       | grep -i "$QUERY"
   else
-    rg -oIN --no-heading -g '*.md' --pcre2 '(?:^|(?<=\s))@[A-Za-z0-9_-]+' "$NOTES_DIR" \
+    rg -oIN --no-heading -g '*.md' --pcre2 '(?:^|(?<=\s))::[A-Za-z0-9_-]+' "$NOTES_DIR" \
       | sort -u
   fi
   exit 0

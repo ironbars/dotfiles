@@ -65,7 +65,9 @@ end
 -- GUI settings
 -- ------------
 if vim.g.neovide then
+  local dir = vim.g.wiki_root or vim.fn.expand("~")
   vim.opt.guifont = "Inconsolata Nerd Font Mono:h16"
+  vim.cmd("cd " .. dir)
   vim.cmd("colorscheme kanagawa-paper")
 
   local function paste()
