@@ -3,7 +3,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
-      local languages = {"go", "python", "lua", "yaml", "markdown"}
+      local languages = {"go", "python", "lua", "yaml", "markdown", "markdown_inline", "powershell", "regex"}
       require("nvim-treesitter").install(languages)
       vim.api.nvim_create_autocmd("FileType", {
         pattern = languages,

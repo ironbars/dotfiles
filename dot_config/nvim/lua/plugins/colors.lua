@@ -2,7 +2,7 @@ return {
   {
     "romainl/Apprentice",
     branch = "fancylines-and-neovim",
-    lazy = false,
+    lazy = true,
     name = "apprentice",
   },
   {
@@ -16,17 +16,17 @@ return {
   },
   {
     "EdenEast/nightfox.nvim",
-    lazy = false,
+    lazy = true,
     name = "nightfox",
   },
   {
     "craftzdog/solarized-osaka.nvim",
-    lazy = false,
+    lazy = true,
     name = "solarized-osaka",
     config = function()
       require("solarized-osaka").setup({
         styles = {
-          keywords = {italic = false},
+          keywords = { italic = false },
           functions = {},
         },
       })
@@ -34,42 +34,42 @@ return {
   },
   {
     "rakr/vim-one",
-    lazy = false,
+    lazy = true,
     name = "one",
   },
   {
     "thesimonho/kanagawa-paper.nvim",
-    lazy = false,
+    lazy = true,
     name = "kanagawa-paper",
   },
   {
     "rose-pine/neovim",
-    lazy = false,
+    lazy = true,
     name = "rose-pine",
   },
   {
     "rebelot/kanagawa.nvim",
-    lazy = false,
+    lazy = true,
     name = "kanagawa",
   },
   {
     "cocopon/iceberg.vim",
-    lazy = false,
+    lazy = true,
     name = "iceberg",
   },
   {
     "bluz71/vim-nightfly-colors",
-    lazy = false,
+    lazy = true,
     name = "nightfly",
   },
   {
     "Softmotions/vim-dark-frost-theme",
-    lazy = false,
+    lazy = true,
     name = "darkfrost",
   },
   {
     "catppuccin/nvim",
-    lazy = false,
+    lazy = true,
     name = "catpuccin",
     config = function()
       require("catppuccin").setup({
@@ -81,7 +81,7 @@ return {
   },
   {
     "ellisonleao/gruvbox.nvim",
-    lazy = false,
+    lazy = true,
     name = "gruvbox",
     config = function()
       require("gruvbox").setup({

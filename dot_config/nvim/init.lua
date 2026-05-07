@@ -7,7 +7,7 @@ require("config.lazy")
 -- -------------------
 vim.opt.termguicolors = true
 vim.cmd("syntax on")
-vim.opt.backspace = {"indent", "eol", "start"}
+vim.opt.backspace = { "indent", "eol", "start" }
 vim.opt.laststatus = 2
 vim.opt.ruler = true
 vim.opt.number = true
@@ -25,7 +25,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.incsearch = true
 vim.opt.hlsearch = true
-vim.keymap.set("n", "<Leader>q", "<cmd>nohlsearch<CR>", {silent = true})
+vim.keymap.set("n", "<Leader>q", "<cmd>nohlsearch<CR>", { silent = true })
 
 -- Extra key bindings
 -- ------------------
@@ -44,7 +44,7 @@ vim.keymap.set("i", "<C-u>", "<esc>viwUea")
 
 -- Syntax highlighting (for strange extenstions)
 -- ---------------------------------------------
-local filetypegroup = vim.api.nvim_create_augroup("filetypes", {clear = true})
+local filetypegroup = vim.api.nvim_create_augroup("filetypes", { clear = true })
 local ft_mappings = {
   ["*.sage"] = "python",
   ["*.adoc"] = "asciidoc",
@@ -55,7 +55,7 @@ local ft_mappings = {
   ["*.plist"] = "xml",
 }
 for pattern, ft in pairs(ft_mappings) do
-  vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+  vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     pattern = pattern,
     group = filetypegroup,
     command = "set filetype=" .. ft,
@@ -82,8 +82,8 @@ if vim.g.neovide then
     require("envy").open()
   end
 
-  vim.keymap.set({"n", "v"}, "<D-v>", '"+p', {desc = "Paste from system clipboard"})
-  vim.keymap.set("i", "<D-v>", paste, {desc = "Paste in insert mode"})
-  vim.keymap.set("c", "<D-v>", "<C-R>+", {desc = "Paste in command mode"})
-  vim.keymap.set("n", "<Leader>en", envy, {desc = "Open envy.nvim"})
+  vim.keymap.set({ "n", "v" }, "<D-v>", '"+p', { desc = "Paste from system clipboard" })
+  vim.keymap.set("i", "<D-v>", paste, { desc = "Paste in insert mode" })
+  vim.keymap.set("c", "<D-v>", "<C-R>+", { desc = "Paste in command mode" })
+  vim.keymap.set("n", "<Leader>en", envy, { desc = "Open envy.nvim" })
 end
