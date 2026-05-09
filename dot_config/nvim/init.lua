@@ -48,8 +48,8 @@ local filetypegroup = vim.api.nvim_create_augroup("filetypes", { clear = true })
 local ft_mappings = {
   ["*.sage"] = "python",
   ["*.adoc"] = "asciidoc",
-  ["*bashrc*"] = "sh",
-  ["*base_*"] = "sh",
+  ["*bashrc*"] = "bash",
+  ["*bash_*"] = "bash",
   ["*.pp"] = "puppet",
   ["poetry.lock"] = "toml",
   ["*.plist"] = "xml",
@@ -68,7 +68,8 @@ if vim.g.neovide then
   local dir = vim.g.wiki_root or vim.fn.expand("~")
   vim.opt.guifont = "Inconsolata Nerd Font Mono:h16"
   vim.cmd("cd " .. dir)
-  vim.cmd("colorscheme kanagawa-paper")
+  -- vim.cmd("colorscheme kanagawa-paper")
+  vim.cmd("colorscheme iceberg")
 
   local function paste()
     vim.api.nvim_paste(vim.fn.getreg('+'), true, -1)

@@ -7,17 +7,17 @@ return {
   },
   {
     "gbprod/nord.nvim",
-    lazy = false,
+    lazy = true,
     name = "nord",
-    priority = 1000,
-    config = function()
-      vim.cmd("colorscheme nord")
-    end,
   },
   {
     "EdenEast/nightfox.nvim",
-    lazy = true,
+    lazy = false,
     name = "nightfox",
+    priority = 1000,
+    config = function()
+      vim.cmd("colorscheme terafox")
+    end,
   },
   {
     "craftzdog/solarized-osaka.nvim",
