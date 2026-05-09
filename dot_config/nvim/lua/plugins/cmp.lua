@@ -58,5 +58,11 @@ return {
       }),
       matching = { disallow_symbol_nonprefix_matching = false },
     })
+
+    cmp.setup.filetype("markdown", {
+      sources = cmp.config.sources({
+        { name = "nvim_lsp" },
+      }),
+    })
   end
 }

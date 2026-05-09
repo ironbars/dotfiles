@@ -4,6 +4,7 @@ return {
   bashls = true,
   yamlls = true,
   powershell_es = true,
+  marksman = true,
   lua_ls = {
     settings = {
       Lua = {
@@ -21,13 +22,6 @@ return {
           globals = { "vim" }
         },
         telemetry = { enable = false },
-      },
-    },
-  },
-  markdown_oxide = {
-    capabilities = {
-      workspace = {
-        didChangeWatchedFiles = { dynamicRegistration = true },
       },
     },
   },
