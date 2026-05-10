@@ -6,13 +6,13 @@
 .bashrc
 .config/shell/bash.sh
 {{- end }}
-{{- if not (lookPath "fzf") }}
+{{- if eq (lookPath "fzf") "" }}
 .config/fzf
 {{- end }}
-{{- if not (lookPath "ghostty") }}
+{{- if eq (lookPath "ghostty") "" }}
 .config/ghostty
 {{- end }}
-{{- if not (lookPath "starship") }}
+{{- if eq (lookPath "starship") "" }}
 .config/starship.toml
 {{- end }}
 {{- if ne .editor "nvim" }}
