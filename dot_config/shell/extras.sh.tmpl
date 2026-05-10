@@ -7,9 +7,6 @@ source <(starship init {{ .shell }})
 # fzf
 # ---
 export FZF_DEFAULT_OPTS_FILE="${HOME}/.config/fzf/config"
-{{-   if lookPath "rg" }}
-export FZF_DEFAULT_COMMAND="rg --files --no-ignore --hidden --follow --glob '!.git/*'"
-{{-   end }}
 
 source <(fzf --{{ .shell }})
 
@@ -20,6 +17,32 @@ fc() {
     find "${1:-.}" -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m
   )" && cd "${dir}"
 }
+
+{{   if lookPath "rg" -}}
+export FZF_DEFAULT_COMMAND="rg --files --no-ignore --hidden --follow --glob '!.git/*'"
+
+rfv() {
+  local query="$*"
+  local reload='reload:rg --column --color=always --smart-case {q} || :'
+  local opener='
+    command -v nvim 2>&1 > /dev/null && export EDITOR="nvim"
+    if [[ "$FZF_SELECT_COUNT" -eq 0 ]]; then
+      "${EDITOR}" {1} +{2}
+    else
+      "${EDITOR}" +cw -q {+f}
+    fi
+  '
+
+  fzf --disabled --ansi --multi \
+    --bind "start:${reload}" --bind "change:${reload}" \
+    --bind "enter:become:${opener}" \
+    --bind "ctrl-o:execute:${opener}" \
+    --delimiter : \
+    --preview "bat --style=full --color=always --highlight-line {2} {1}" \
+    --preview-window "~4,+{2}+4/3,<110(up)" \
+    --query "${query}"
+}
+{{-   end }}
 {{ end }}
 {{- if lookPath "zoxide" }}
 # zoxide
