@@ -12,6 +12,9 @@
 {{- if not (lookPath "ghostty") }}
 .config/ghostty
 {{- end }}
+{{- if not (lookPath "starship") }}
+.config/starship.toml
+{{- end }}
 {{- if ne .editor "nvim" }}
 .config/nvim
 .local/bin/notes
