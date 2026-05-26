@@ -53,6 +53,7 @@ local ft_mappings = {
   ["*.pp"] = "puppet",
   ["poetry.lock"] = "toml",
   ["*.plist"] = "xml",
+  ["*.tmpl"] = "gotexttmpl",
 }
 for pattern, ft in pairs(ft_mappings) do
   vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
@@ -67,6 +68,7 @@ end
 if vim.g.neovide then
   local dir = vim.g.wiki_root or vim.fn.expand("~")
   vim.opt.guifont = "Inconsolata Nerd Font Mono:h16"
+  vim.opt.conceallevel = 2
   vim.cmd("cd " .. dir)
   -- vim.cmd("colorscheme kanagawa-paper")
   vim.cmd("colorscheme iceberg")

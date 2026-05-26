@@ -20,10 +20,14 @@ function M.make_config(server_name)
   local base = { capabilities = M.make_capabilities() }
 
   if type(override) == "table" then
-    return vim.tbl_deep_extend("force", base, override)
+    local config = vim.tbl_deep_extend("force", base, override)
+    local post_install = config.post_install
+    config.post_install = nil
+
+    return config, post_install
   end
 
-  return base
+  return base, nil
 end
 
 return M
