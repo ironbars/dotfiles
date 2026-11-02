@@ -1,5 +1,7 @@
 "Basic configuration
 "===================
+set runtimepath^=~/.config/vim
+set runtimepath+=~/.config/vim/after
 set nocompatible
 set termguicolors
 syntax on
@@ -27,12 +29,6 @@ set incsearch
 set hlsearch
 nnoremap <silent> <leader>q :nohlsearch<CR>
 
-"Custom command for fzf and ripgrep
-"command! -bang -nargs=* Search call fzf#vim#grep(
-"  \ 'rg --line-number --no-heading --fixed-strings --ignore-case
-"  \ --no-ignore --hidden --follow --glob "!.git/*" --color "always" '
-"  \ . shellescape(<q-args>), 0, <bang>0)
-
 "Extra key bindings
 "==================
 nnoremap j gj
@@ -49,10 +45,6 @@ nnoremap <leader>b :ls<CR>:b<space>
 "newlines
 nnoremap <leader>o o<esc>"_D
 nnoremap <leader>j i<CR><esc>
-"open fzf file search
-"nnoremap <leader>fs :Files<CR>
-"open rg and fzf to search inside files
-"nnoremap <leader>s :Search<space>
 "change word to uppercase
 inoremap <C-u> <esc>viwUea
 
@@ -72,7 +64,6 @@ augroup END
 "let g:airline_theme = 'apprentice'
 "let g:airline_theme='owo'
 
-{{ if eq .class "home" -}}
 "Plugins
 "=======
 call plug#begin('~/.config/vim/addons')
@@ -80,12 +71,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
-Plug 'vimwiki/vimwiki'
-Plug 'alok/notational-fzf-vim'
 
 "syntax
-Plug 'keysmashes/vim-lilypond'
-Plug 'google/vim-jsonnet'
+Plug 'vim-polyglot/vim-polyglot'
 
 "colors
 Plug 'romainl/Apprentice', {'as': 'apprentice'}
@@ -93,19 +81,6 @@ Plug 'nordtheme/vim', {'as': 'nord'}
 Plug 'jnurmine/Zenburn', {'as': 'zenburn'}
 Plug 'altercation/vim-colors-solarized', {'as': 'solarized'}
 call plug#end()
-
-"Plugin configurations
-"=====================
-let g:nv_search_paths = ['~/notes']
-let g:nv_create_note_key = 'ctrl-n'
-let g:nv_create_if_no_results = 1
-let g:nv_create_note_window = 'edit'
-let g:vimwiki_list = [{ 'path': '~/notes', 'syntax': 'markdown', 'ext': 'md'}]
-let g:vimwiki_global_ext = 0
-let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown'}
-
-nnoremap <leader>n :NV<CR>
-{{- end }}
 
 "Colors
 "======

@@ -60,3 +60,8 @@ zl() {
 # ------
 alias vim="nvim"
 {{ end }}
+{{- if and (eq .editor "vim") (eq .class "work") }}
+# vim
+# ---
+export MYVIMRC="${HOME}/.config/vim/vimrc"
+{{ end }}
